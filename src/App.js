@@ -21,7 +21,7 @@ function App() {
         <div className="container">
           <Route
             exact
-            path="/"
+            path="https://ngf-global.herokuapp.com/"
             render={props => (
               <React.Fragment>
                 <AppAppBar />
@@ -31,7 +31,7 @@ function App() {
             )}
           />
           <Route
-            path="/NgfEarth"
+            path="https://ngf-global.herokuapp.com/NgfEarth"
             render={props => (
               <React.Fragment>
                 <AppAppBar />
