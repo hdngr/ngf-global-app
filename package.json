@@ -2,7 +2,7 @@
   "name": "ngf-global-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://arvibe.xyz/NGFDemo/",
+  "homepage": "https://ngf-global.herokuapp.com/",
   "main": "./src",
   "engines": {
     "node": "10.14.2",
