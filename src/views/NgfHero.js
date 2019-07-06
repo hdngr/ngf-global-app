@@ -86,7 +86,7 @@ function NgfHero(props) {
           size="large"
           className={classes.button}
           component={linkProps => (
-            <Link {...linkProps} to="/BlankTemplate" variant="button" />
+            <Link {...linkProps} to="/NgfEarth" variant="button" />
           )}
         >
           Seller
@@ -98,13 +98,9 @@ function NgfHero(props) {
         variant="contained"
         size="large"
         className={classes.button}
-        // component={linkProps => (
-        //   <Link
-        //     {...linkProps}
-        //     href="/premium-themes/onepirate/sign-up"
-        //     variant="button"
-        //   />
-        // )}
+        component={linkProps => (
+          <Link {...linkProps} to="/NgfEarth" variant="button" />
+        )}
       >
         Vendor
       </Button>
