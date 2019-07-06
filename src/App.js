@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import withRoot from "./withRoot";
+// --- Post bootstrap -----
+import React from "react";
+import AppAppBar from "./views/AppAppBar";
+import NgfHero from "./views/NgfHero";
+import { hot } from "react-hot-loader/root";
+
+// import NgfValues from "./views/NgfValues";
+// import NgfCategories from "./views/NgfCategories.js";
+// import NgfHowItWorks from "./views/NgfHowItWorks.js";
+// import NgfCTA from "./views/NgfCTA";
+// import NgfQuestions from "./views/NgfQuestions";
+import NgfFooter from "./views/NgfFooter";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import NgfCesium from "./views/NgfCesium";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <React.Fragment>
+                <AppAppBar />
+                <NgfHero />
+                <NgfFooter />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path="/NgfEarth"
+            render={props => (
+              <React.Fragment>
+                <AppAppBar />
+                <NgfCesium />
+                <NgfFooter />
+              </React.Fragment>
+            )}
+          />
+        </div>
+      </div>
+    </Router>
   );
 }
 
-export default App;
+export default hot(withRoot(App));
