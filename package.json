@@ -29,7 +29,7 @@
     "resium": "^1.4.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --progress --config webpack.config.js",
+    "start": "webpack-dev-server --progress",
     "test": "eslint .",
     "build": "webpack --mode production --config webpack.config.js",
     "rbuild": "react-scripts build --mode production"
