@@ -21,7 +21,7 @@ function App() {
         <div className="container">
           <Route
             exact
-            path="/"
+            path="/NgfEarth"
             render={props => (
               <React.Fragment>
                 <AppAppBar />
@@ -31,7 +31,7 @@ function App() {
             )}
           />
           <Route
-            path="/NgfEarth"
+            path="/"
             render={props => (
               <React.Fragment>
                 <AppAppBar />
