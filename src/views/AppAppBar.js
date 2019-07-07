@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 //import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -38,30 +38,31 @@ const styles = theme => ({
   }
 });
 
-function AppAppBar(props) {
-  const { classes } = props;
-
-  return (
-    <div>
-      <AppBar position="fixed">
-        <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
-          <Typography
-            variant="h6"
-            color="inherit"
-            className={classes.title}
-            // component={linkProps => (
-            //   <Link
-            //     {...linkProps}
-            //     href="/premium-themes/onepirate"
-            //     variant="button"
-            //   />
-            // )}
-          >
-            {"Find Your Market"}
-          </Typography>
-          <div className={classes.right}>
-            {/* <Typography
+class AppAppBar extends Component {
+  render() {
+    const { classes } = this.props;
+    const mainTitle = this.props.mainTitle;
+    return (
+      <div>
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolbar}>
+            <div className={classes.left} />
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.title}
+              // component={linkProps => (
+              //   <Link
+              //     {...linkProps}
+              //     href="/premium-themes/onepirate"
+              //     variant="button"
+              //   />
+              // )}
+            >
+              {mainTitle}
+            </Typography>
+            <div className={classes.right}>
+              {/* <Typography
               color="inherit"
               variant="h6"
               className={classes.rightLink}
@@ -88,12 +89,13 @@ function AppAppBar(props) {
             >
               {"Sign Up"}
             </Typography> */}
-          </div>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.placeholder} />
-    </div>
-  );
+            </div>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.placeholder} />
+      </div>
+    );
+  }
 }
 
 AppAppBar.propTypes = {

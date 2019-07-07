@@ -75,7 +75,7 @@ function NgfHero(props) {
           size="large"
           className={classes.button}
           component={linkProps => (
-            <Link {...linkProps} to="/NgfEarth" variant="button" />
+            <Link {...linkProps} to="/Location" variant="button" />
           )}
         >
           Buyer
@@ -86,23 +86,32 @@ function NgfHero(props) {
           size="large"
           className={classes.button}
           component={linkProps => (
-            <Link {...linkProps} to="/NgfEarth" variant="button" />
+            <Link {...linkProps} to="/Location" variant="button" />
           )}
         >
           Seller
+        </Button>{" "}
+        <Button
+          color="secondary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component={linkProps => (
+            <Link {...linkProps} to="/Location" variant="button" />
+          )}
+        >
+          Vendor
         </Button>
       </span>
       <Button
-        style={{ marginTop: "5px" }}
-        color="secondary"
+        style={{ marginTop: "10px" }}
+        color="primary"
         variant="contained"
         size="large"
         className={classes.button}
-        component={linkProps => (
-          <Link {...linkProps} to="/NgfEarth" variant="button" />
-        )}
+        component={linkProps => <Link {...linkProps} to="/" variant="button" />}
       >
-        Vendor
+        Back
       </Button>
       <Typography
         style={{ marginTop: "50px" }}

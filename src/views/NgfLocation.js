@@ -102,19 +102,32 @@ function NgfHero(props) {
         color="inherit"
         className={classes.more}
       >
-        Example: Cannabis
+        Example: 199 Collinwood Dr. Raeford, NC, 28376
       </Typography>
-      <Button
-        color="primary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component={linkProps => (
-          <Link {...linkProps} to="/AccountType" variant="button" />
-        )}
-      >
-        Next
-      </Button>
+      <span>
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component={linkProps => (
+            <Link {...linkProps} to="/AccountType" variant="button" />
+          )}
+        >
+          Back
+        </Button>{" "}
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          className={classes.button}
+          component={linkProps => (
+            <Link {...linkProps} to="/" variant="button" />
+          )}
+        >
+          Next
+        </Button>
+      </span>
     </NgfHeroLayout>
   );
 }
