@@ -21,21 +21,21 @@ function App() {
         <div className="container">
           <Route
             exact
-            path="/NgfEarth"
-            render={props => (
-              <React.Fragment>
-                <AppAppBar />
-                <NgfHero />
-                <NgfFooter />
-              </React.Fragment>
-            )}
-          />
-          <Route
             path="/"
             render={props => (
               <React.Fragment>
                 <AppAppBar />
                 <NgfCesium />
+                <NgfFooter />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            path="/NgfEarth"
+            render={props => (
+              <React.Fragment>
+                <AppAppBar />
+                <NgfHero />
                 <NgfFooter />
               </React.Fragment>
             )}
