@@ -84,10 +84,7 @@ function NgfHero(props) {
           height: "500px",
           width: "500px"
         }}
-      >
-        {/* <Entity position={position} point={pointGraphics} />
-        <ImageryLayer imageryProvider={ionBing} /> */}
-      </div>
+      />
 
       <Paper className={classes.root}>
         <InputBase
