@@ -2,7 +2,7 @@ import withRoot from "./withRoot";
 // --- Post bootstrap -----
 import React, { Component } from "react";
 import AppAppBar from "./views/AppAppBar";
-import NgfHero from "./views/NgfHero";
+import NgfAccountType from "./views/NgfAccountType";
 import NgfFindMarket from "./views/NgfFindMarket";
 import NgfLocation from "./views/NgfLocation";
 import NgfMarketSelection from "./views/NgfMarketSelection";
@@ -39,7 +39,7 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.accountTitle} />
-                  <NgfHero />
+                  <NgfAccountType />
                   <NgfFooter />
                 </React.Fragment>
               )}
@@ -55,7 +55,7 @@ class App extends Component {
               )}
             />
             <Route
-              path="/MarketSelection"
+              path="/Market"
               render={props => (
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.marketTitle} />

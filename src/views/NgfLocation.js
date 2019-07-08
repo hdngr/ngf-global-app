@@ -160,11 +160,7 @@ class NgfHero extends Component {
                   size="large"
                   className={classes.button}
                   component={linkProps => (
-                    <Link
-                      {...linkProps}
-                      to="/MarketSelection"
-                      variant="button"
-                    />
+                    <Link {...linkProps} to="/Market" variant="button" />
                   )}
                 >
                   Next

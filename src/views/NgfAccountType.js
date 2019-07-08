@@ -30,7 +30,7 @@ const styles = theme => ({
   }
 });
 
-function NgfHero(props) {
+function NgfAccountType(props) {
   const { classes } = props;
 
   return (
@@ -141,8 +141,8 @@ function NgfHero(props) {
   );
 }
 
-NgfHero.propTypes = {
+NgfAccountType.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(NgfHero);
+export default withStyles(styles)(NgfAccountType);
