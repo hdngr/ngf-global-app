@@ -5,7 +5,6 @@ import Button from "../components/Button";
 import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 import NgfHeroLayout from "./NgfHeroLayout";
-//import ngflogoImage from "../images/ngflogoImage3.png";
 import ngflogo_marker from "../images/ngflogo_marker.png";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
@@ -17,7 +16,7 @@ import Cesium from "cesium";
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhODBjOTFlNi04MmQ3LTQwNWUtOGUxMy05N2ZjOTQ2OWJiNWMiLCJpZCI6MTI5NjksInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjIyNTExNTF9.sp6bn2eKUSCKK1yXjlnqqzI0XL0YRgyM5sqb9T4Qnp0";
 
-function NgfHero(props) {
+function NgfFindMarket(props) {
   const { classes } = props;
 
   //const [count, setCount] = useState(0);
@@ -158,8 +157,8 @@ const styles = theme => ({
   }
 });
 
-NgfHero.propTypes = {
+NgfFindMarket.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(NgfHero);
+export default withStyles(styles)(NgfFindMarket);

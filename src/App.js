@@ -3,7 +3,7 @@ import withRoot from "./withRoot";
 import React, { Component } from "react";
 import AppAppBar from "./views/AppAppBar";
 import NgfHero from "./views/NgfHero";
-import NgfCesium from "./views/NgfCesium";
+import NgfFindMarket from "./views/NgfFindMarket";
 import NgfLocation from "./views/NgfLocation";
 import NgfMarketSelection from "./views/NgfMarketSelection";
 import NgfFooter from "./views/NgfFooter";
@@ -29,7 +29,7 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.mainTitle} />
-                  <NgfCesium />
+                  <NgfFindMarket />
                   <NgfFooter />
                 </React.Fragment>
               )}

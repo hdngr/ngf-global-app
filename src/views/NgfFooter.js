@@ -8,7 +8,7 @@ import Typography from "../components/Typography";
 const styles = theme => ({
   root: {
     display: "flex",
-    backgroundColor: theme.palette.secondary.darkest
+    backgroundColor: theme.palette.primary.sub
   },
   layoutBody: {
     marginTop: theme.spacing.unit * 7.5,

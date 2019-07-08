@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import LayoutBody from "../components/LayoutBody";
-//import ngfWonder from "../images/productHeroWonder.png";
-//import arrowDown from "../images/productHeroArrowDown.png";
 
 const styles = theme => ({
   root: {

@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-//import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../components/AppBar";
 import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
 import Typography from "../components/Typography";
-
-//have to setup link pages...
-//import Link from "../next/Link";
 
 const styles = theme => ({
   title: {
@@ -47,18 +43,7 @@ class AppAppBar extends Component {
         <AppBar position="fixed">
           <Toolbar className={classes.toolbar}>
             <div className={classes.left} />
-            <Typography
-              variant="h6"
-              color="inherit"
-              className={classes.title}
-              // component={linkProps => (
-              //   <Link
-              //     {...linkProps}
-              //     href="/premium-themes/onepirate"
-              //     variant="button"
-              //   />
-              // )}
-            >
+            <Typography variant="h6" color="inherit" className={classes.title}>
               {mainTitle}
             </Typography>
             <div className={classes.right}>
