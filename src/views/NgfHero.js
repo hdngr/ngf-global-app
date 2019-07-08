@@ -6,6 +6,7 @@ import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 import NgfHeroLayout from "./NgfHeroLayout";
 import ngflogoImage from "../images/ngflogoImage3.png";
+import { Grid } from "@material-ui/core";
 
 const backgroundImage = "https://arvibe.xyz/testphotos/ngf-bkg.png";
 
@@ -68,41 +69,57 @@ function NgfHero(props) {
         Revolutionizing the Buyer, Seller and lender experience across the
         Agriculture Industry
       </Typography> */}
-      <span style={{ marginTop: "50px" }}>
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component={linkProps => (
-            <Link {...linkProps} to="/Location" variant="button" />
-          )}
-        >
-          Buyer
-        </Button>{" "}
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component={linkProps => (
-            <Link {...linkProps} to="/Location" variant="button" />
-          )}
-        >
-          Seller
-        </Button>{" "}
-        <Button
-          color="secondary"
-          variant="contained"
-          size="large"
-          className={classes.button}
-          component={linkProps => (
-            <Link {...linkProps} to="/Location" variant="button" />
-          )}
-        >
-          Vendor
-        </Button>
-      </span>
+      <Grid
+        container
+        className={classes.root}
+        spacing={12}
+        style={{ marginTop: "50px" }}
+      >
+        <Grid item xs={12}>
+          <Grid container justify="center" spacing={2}>
+            <Grid item>
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component={linkProps => (
+                  <Link {...linkProps} to="/Location" variant="button" />
+                )}
+              >
+                Buyer
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component={linkProps => (
+                  <Link {...linkProps} to="/Location" variant="button" />
+                )}
+              >
+                Seller
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                color="secondary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+                component={linkProps => (
+                  <Link {...linkProps} to="/Location" variant="button" />
+                )}
+              >
+                Vendor
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      {/*  Back Button */}
       <Button
         style={{ marginTop: "10px" }}
         color="primary"

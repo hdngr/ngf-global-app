@@ -54,13 +54,19 @@ function NgfFooter(props) {
   return (
     <Typography component="footer" className={classes.root}>
       <LayoutBody className={classes.layoutBody} width="large">
-        <Grid container>
-          <Grid item xs={6} sm={4} md={2} />
-          <Grid item xs={6} sm={4} md={2} />
-          <Grid item xs={6} sm={8} md={4}>
-            <Typography variant="h5" marked="left" style={{ color: "white" }}>
-              © 2018 NGF-Global
-            </Typography>
+        <Grid container className={classes.root} spacing={12}>
+          <Grid item sm={12}>
+            <Grid container justify="center" spacing={2}>
+              <Grid item>
+                <Typography
+                  variant="h5"
+                  marked="left"
+                  style={{ color: "white" }}
+                >
+                  © 2018 NGF-Global
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </LayoutBody>

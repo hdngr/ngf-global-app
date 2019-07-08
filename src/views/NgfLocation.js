@@ -12,6 +12,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Cesium from "cesium";
+import { Grid } from "@material-ui/core";
 
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhODBjOTFlNi04MmQ3LTQwNWUtOGUxMy05N2ZjOTQ2OWJiNWMiLCJpZCI6MTI5NjksInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjIyNTExNTF9.sp6bn2eKUSCKK1yXjlnqqzI0XL0YRgyM5sqb9T4Qnp0";
@@ -132,7 +133,7 @@ class NgfHero extends Component {
           }}
         />
 
-        <Paper className={classes.root}>
+        <Paper className={classes.search}>
           <InputBase
             className={classes.input}
             placeholder="Enter your location"
@@ -150,30 +151,38 @@ class NgfHero extends Component {
         >
           Example: 199 Collinwood Dr. Raeford, NC, 28376
         </Typography>
-        <span>
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            className={classes.button}
-            component={linkProps => (
-              <Link {...linkProps} to="/AccountType" variant="button" />
-            )}
-          >
-            Back
-          </Button>{" "}
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            className={classes.button}
-            component={linkProps => (
-              <Link {...linkProps} to="/" variant="button" />
-            )}
-          >
-            Next
-          </Button>
-        </span>
+        <Grid container className={classes.root} spacing={12}>
+          <Grid item xs={12}>
+            <Grid container justify="center" spacing={2}>
+              <Grid item>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  component={linkProps => (
+                    <Link {...linkProps} to="/AccountType" variant="button" />
+                  )}
+                >
+                  Back
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  className={classes.button}
+                  component={linkProps => (
+                    <Link {...linkProps} to="/" variant="button" />
+                  )}
+                >
+                  Next
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </NgfHeroLayout>
     );
   }
@@ -198,7 +207,7 @@ const styles = theme => ({
   more: {
     marginTop: theme.spacing.unit * 2
   },
-  root: {
+  search: {
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
