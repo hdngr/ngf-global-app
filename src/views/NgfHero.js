@@ -6,7 +6,7 @@ import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 import NgfHeroLayout from "./NgfHeroLayout";
 import ngflogoImage from "../images/ngflogoImage3.png";
-import backgroundImage from "../images/ngf_background.png";
+import backgroundImage from "../images/ngf_background_no_logo.png";
 import { Grid } from "@material-ui/core";
 
 const styles = theme => ({

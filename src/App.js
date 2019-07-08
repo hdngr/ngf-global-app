@@ -1,15 +1,11 @@
 import withRoot from "./withRoot";
 // --- Post bootstrap -----
-// import NgfValues from "./views/NgfValues";
-// import NgfCategories from "./views/NgfCategories.js";
-// import NgfHowItWorks from "./views/NgfHowItWorks.js";
-// import NgfCTA from "./views/NgfCTA";
-// import NgfQuestions from "./views/NgfQuestions";
 import React, { Component } from "react";
 import AppAppBar from "./views/AppAppBar";
 import NgfHero from "./views/NgfHero";
 import NgfCesium from "./views/NgfCesium";
 import NgfLocation from "./views/NgfLocation";
+import NgfMarketSelection from "./views/NgfMarketSelection";
 import NgfFooter from "./views/NgfFooter";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
@@ -18,7 +14,8 @@ class App extends Component {
   state = {
     mainTitle: "Find Your Market",
     accountTitle: "Choose Your Account",
-    locationTitle: "Pick Your Location"
+    locationTitle: "Pick Your Location",
+    marketTitle: "Create Your Market"
   };
 
   render() {
@@ -53,6 +50,16 @@ class App extends Component {
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.locationTitle} />
                   <NgfLocation />
+                  <NgfFooter />
+                </React.Fragment>
+              )}
+            />
+            <Route
+              path="/MarketSelection"
+              render={props => (
+                <React.Fragment>
+                  <AppAppBar mainTitle={this.state.marketTitle} />
+                  <NgfMarketSelection />
                   <NgfFooter />
                 </React.Fragment>
               )}

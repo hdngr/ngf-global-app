@@ -57,17 +57,9 @@ function NgfHeroLayout(props) {
   return (
     <section className={classes.root}>
       <LayoutBody className={classes.layoutBody} width="full">
-        {/* <img src={ngfWonder} alt="wonder" width="147" height="80" /> */}
         {children}
-        <div className={classes.backdrop} />
+        {/* <div className={classes.backdrop} /> */}
         <div className={classNames(classes.background, backgroundClassName)} />
-        {/* <img
-          className={classes.arrowDown}
-          src={arrowDown}
-          height="16"
-          width="12"
-          alt="arrow down"
-        /> */}
       </LayoutBody>
     </section>
   );

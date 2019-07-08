@@ -108,18 +108,7 @@ class NgfHero extends Component {
     const { classes } = this.props;
     return (
       <NgfHeroLayout backgroundClassName={classes.background}>
-        {/* Increase the network loading priority of the background image. */}
         <img style={{ display: "none" }} src={backgroundImage} alt="" />
-        {/* <img
-          style={{
-          display: "inline",
-          height: "300px",
-          width: "300px",
-          marginTop: "100px"
-        }}
-        src={ngflogoImage}
-        alt=""
-    /> */}
         <div
           id="cesiumContainer"
           style={{
@@ -171,7 +160,11 @@ class NgfHero extends Component {
                   size="large"
                   className={classes.button}
                   component={linkProps => (
-                    <Link {...linkProps} to="/" variant="button" />
+                    <Link
+                      {...linkProps}
+                      to="/MarketSelection"
+                      variant="button"
+                    />
                   )}
                 >
                   Next
