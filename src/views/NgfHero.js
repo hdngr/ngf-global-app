@@ -6,15 +6,14 @@ import Typography from "../components/Typography";
 import { Link } from "react-router-dom";
 import NgfHeroLayout from "./NgfHeroLayout";
 import ngflogoImage from "../images/ngflogoImage3.png";
+import backgroundImage from "../images/ngf_background.png";
 import { Grid } from "@material-ui/core";
-
-const backgroundImage = "https://arvibe.xyz/testphotos/ngf-bkg.png";
 
 const styles = theme => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "center"
+    backgroundPosition: "cover"
   },
   button: {
     minWidth: 200

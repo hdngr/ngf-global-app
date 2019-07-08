@@ -11,12 +11,11 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import backgroundImage from "../images/ngf_background.png";
 import Cesium from "cesium";
 
 Cesium.Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhODBjOTFlNi04MmQ3LTQwNWUtOGUxMy05N2ZjOTQ2OWJiNWMiLCJpZCI6MTI5NjksInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1NjIyNTExNTF9.sp6bn2eKUSCKK1yXjlnqqzI0XL0YRgyM5sqb9T4Qnp0";
-
-const backgroundImage = "https://arvibe.xyz/testphotos/ngf-bkg.png";
 
 function NgfHero(props) {
   const { classes } = props;
@@ -123,7 +122,7 @@ const styles = theme => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "center"
+    backgroundPosition: "cover"
   },
   button: {
     minWidth: 200
