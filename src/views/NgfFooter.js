@@ -11,8 +11,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.secondary.darkest
   },
   layoutBody: {
-    marginTop: theme.spacing.unit * 6,
-    marginBottom: theme.spacing.unit * 6,
+    marginTop: theme.spacing.unit * 7.5,
+    marginBottom: theme.spacing.unit * 7.5,
     display: "flex"
   },
   iconsWrapper: {
