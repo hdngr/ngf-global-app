@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import AppAppBar from "./views/AppAppBar";
 import NgfAccountType from "./views/NgfAccountType";
 import NgfFindMarket from "./views/NgfFindMarket";
+import NgfLogin from "./views/NgfLogin";
 import NgfLocation from "./views/NgfLocation";
 import NgfMarketSelection from "./views/NgfMarketSelection";
 import NgfFooter from "./views/NgfFooter";
@@ -30,6 +31,16 @@ class App extends Component {
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.mainTitle} />
                   <NgfFindMarket />
+                  <NgfFooter />
+                </React.Fragment>
+              )}
+            />
+            <Route
+              path="/Login"
+              render={props => (
+                <React.Fragment>
+                  <AppAppBar mainTitle={this.state.mainTitle} />
+                  <NgfLogin />
                   <NgfFooter />
                 </React.Fragment>
               )}

@@ -108,7 +108,7 @@ function NgfFindMarket(props) {
         size="large"
         className={classes.button}
         component={linkProps => (
-          <Link {...linkProps} to="/AccountType" variant="button" />
+          <Link {...linkProps} to="/Login" variant="button" />
         )}
       >
         Next
