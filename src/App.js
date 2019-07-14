@@ -16,7 +16,7 @@ class App extends Component {
     mainTitle: "Find Your Market",
     accountTitle: "Choose Your Account",
     locationTitle: "Pick Your Location",
-    marketTitle: "Create Your Market"
+    marketTitle: "NGF-Global Marketplace"
   };
 
   render() {
@@ -71,7 +71,7 @@ class App extends Component {
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.marketTitle} />
                   <NgfMarketSelection />
-                  <NgfFooter />
+                  {/* <NgfFooter /> */}
                 </React.Fragment>
               )}
             />
