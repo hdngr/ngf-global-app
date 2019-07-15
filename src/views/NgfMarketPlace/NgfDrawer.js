@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,10 +10,23 @@ import clsx from "clsx";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import { Checkbox } from "@material-ui/core";
+import Hidden from "@material-ui/core/Hidden";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import MenuIcon from "@material-ui/icons/Menu";
+import Typography from "@material-ui/core/Typography";
+
 const drawerWidth = 240;
 const treeMargin = 10;
 function NgfDrawer(props) {
-  const { classes } = props;
+  const { container } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  function handleDrawerToggle() {
+    setMobileOpen(!mobileOpen);
+  }
 
   //Categories for the drop down menu
   const categories = ["Commodities", "Land Types", "Machinery"];
@@ -135,379 +148,422 @@ function NgfDrawer(props) {
     });
   };
 
-  return (
-    <Drawer
-      className={classes.drawer}
-      variant="permanent"
-      classes={{
-        paper: classes.drawerPaper
-      }}
-    >
-      <List>
-        {categories.map((
-          text,
-          listkey //Categories mapped
-        ) => (
-          <div>
-            {/* When clicked it will handle expanding the list */}
-            <ListItem button onClick={handleExpandClick(text, listkey)}>
-              <ListItemText primary={text} />
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanse[listkey]
-                })}
-                value={text}
-                onClick={handleExpandClick(text, listkey)} //When clicked it will handle expanding the list
-                aria-expanded={expanse[listkey]}
-                aria-label="Show more"
-              >
-                <ExpandMoreIcon />{" "}
-                {/*Expand icon is located on the right of the category buttons*/}
-              </IconButton>
-            </ListItem>
-            <Divider />
-            <Collapse in={expanse[listkey]} timeout="auto" unmountOnExit>
-              <List>
-                {listkey === 0
-                  ? commodities.map((text, commodkey) => (
-                      <div>
-                        <ListItem>
-                          {/*List for commodities checkboxs i.e. Pulses, Oil Seed, Hemp*/}
-                          <Checkbox
-                            checked={expanse[commodkey + commodMarker]}
-                            onChange={handleExpandClick(
-                              text,
-                              commodkey + commodMarker //Constant commodMarker = 3
-                            )}
-                          />
-                          {text}
-                        </ListItem>
-                        <Collapse
-                          in={expanse[commodkey + commodMarker]}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          {text === "Pulses"
-                            ? pulses.map((text, pulsekey) => (
-                                <div>
-                                  <ListItem>
-                                    {/*Sub-category for pulses i.e. pease, lentil, beans */}
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      checked={expanse[pulsekey + peasMarker]}
-                                      onChange={handleExpandClick(
-                                        text,
-                                        pulsekey + peasMarker //Constant peasMarker = 6
-                                      )}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                  <Collapse
-                                    in={expanse[pulsekey + peasMarker]}
-                                    timeout="auto"
-                                    unmountOnExit
-                                  >
-                                    {text === "Lentils"
-                                      ? lentils.map((text, lentilkey) => (
-                                          <div>
-                                            <ListItem>
-                                              {/*Sub-category for pulses i.e. pease, lentil, beans */}
-                                              <Checkbox
-                                                style={{
-                                                  marginLeft: treeMargin * 4
-                                                }}
-                                                onChange={handleExpandClick(
-                                                  text,
-                                                  lentilkey + lentilMarker + 1
-                                                )}
-                                              />
-                                              {text}
-                                            </ListItem>
-                                            <Collapse
-                                              in={
-                                                expanse[
-                                                  lentilkey + lentilMarker + 1
-                                                ]
-                                              }
-                                              timeout="auto"
-                                              unmountOnExit
-                                            >
-                                              {text === "Green"
-                                                ? lentilGreen.map(
-                                                    (text, lgkey) => (
-                                                      <div>
-                                                        <ListItem>
-                                                          <Checkbox
-                                                            style={{
-                                                              marginLeft:
-                                                                treeMargin * 8
-                                                            }}
-                                                            onChange={handleExpandClick(
-                                                              text,
-                                                              lgkey +
-                                                                lentilMarker
-                                                            )}
-                                                          />
-                                                          {text}
-                                                        </ListItem>
-                                                      </div>
-                                                    )
-                                                  )
-                                                : null}
-                                              {text === "Red"
-                                                ? lentilRed.map(
-                                                    (text, ldkey) => (
-                                                      <div>
-                                                        <ListItem>
-                                                          <Checkbox
-                                                            style={{
-                                                              marginLeft:
-                                                                treeMargin * 8
-                                                            }}
-                                                            onChange={handleExpandClick(
-                                                              text,
-                                                              ldkey +
-                                                                lentilMarker
-                                                            )}
-                                                          />
-                                                          {text}
-                                                        </ListItem>
-                                                      </div>
-                                                    )
-                                                  )
-                                                : null}
-                                            </Collapse>
-                                          </div>
-                                        ))
-                                      : null}
-                                    {text === "Peas"
-                                      ? peas.map((text, peaskey) => (
-                                          <div>
-                                            <ListItem>
-                                              {/*Sub-category for pulses i.e. pease, lentil, beans */}
-                                              <Checkbox
-                                                style={{
-                                                  marginLeft: treeMargin * 4
-                                                }}
-                                                onChange={handleExpandClick(
-                                                  text,
-                                                  peaskey + peasMarker + 1
-                                                )}
-                                              />
-                                              {text}
-                                            </ListItem>
-                                            <Collapse
-                                              in={
-                                                expanse[
-                                                  peaskey + peasMarker + 1
-                                                ]
-                                              }
-                                              timeout="auto"
-                                              unmountOnExit
-                                            />
-                                          </div>
-                                        ))
-                                      : null}
-                                  </Collapse>
-                                </div>
-                              ))
-                            : null}
-                          {text === "Oil Seeds"
-                            ? oilseeds.map((text, oilseedskey) => (
-                                <div>
-                                  <ListItem>
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      onChange={handleExpandClick(
-                                        text,
-                                        //Terinary operator to match the location of the mustard seed
-                                        oilseedskey === 5
-                                          ? 12
-                                          : oilseedskey + flaxMarker
-                                      )}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                  <Collapse
-                                    in={
-                                      expanse[
-                                        oilseedskey === 5
-                                          ? 12
-                                          : oilseedskey + flaxMarker
-                                      ]
-                                    }
-                                    timeout="auto"
-                                    unmountOnExit
-                                  >
-                                    {text === "Flax"
-                                      ? flax.map((text, flaxkey) => (
-                                          <div>
-                                            <ListItem>
-                                              <Checkbox
-                                                style={{
-                                                  marginLeft: treeMargin * 4
-                                                }}
-                                                onChange={handleExpandClick(
-                                                  text,
-                                                  flaxkey
-                                                )}
-                                              />
-                                              {text}
-                                            </ListItem>
-                                          </div>
-                                        ))
-                                      : null}
-                                    {text === "Canola"
-                                      ? canola.map((text, canolakey) => (
-                                          <div>
-                                            <ListItem>
-                                              <Checkbox
-                                                style={{
-                                                  marginLeft: treeMargin * 4
-                                                }}
-                                                onChange={handleExpandClick(
-                                                  text,
-                                                  canolakey
-                                                )}
-                                              />
-                                              {text}
-                                            </ListItem>
-                                          </div>
-                                        ))
-                                      : null}
-                                    {text === "Mustard"
-                                      ? mustard.map((text, mustardkey) => (
-                                          <div>
-                                            <ListItem>
-                                              <Checkbox
-                                                style={{
-                                                  marginLeft: treeMargin * 4
-                                                }}
-                                                onChange={handleExpandClick(
-                                                  text,
-                                                  mustardkey
-                                                )}
-                                              />
-                                              {text}
-                                            </ListItem>
-                                          </div>
-                                        ))
-                                      : null}
-                                  </Collapse>
-                                </div>
-                              ))
-                            : null}
-                          {text === "Hemp"
-                            ? hemp.map((text, key) => (
-                                <div>
-                                  <ListItem>
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      onChange={handleExpandClick(
-                                        text,
-                                        key + commodMarker
-                                      )}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                </div>
-                              ))
-                            : null}
-                        </Collapse>
-                      </div>
-                    ))
-                  : null}
-                {listkey === 1
-                  ? land.map((text, landkey) => (
-                      <div>
-                        <ListItem>
-                          <Checkbox
-                            onChange={handleExpandClick(
-                              text,
-                              landkey + commodMarker
-                            )}
-                          />
-                          {text}
-                        </ListItem>
-                        <Collapse
-                          in={expanse[landkey + commodMarker]}
-                          timeout="auto"
-                          unmountOnExit
+  const drawer = (
+    <List>
+      {categories.map((
+        text,
+        listkey //Categories mapped
+      ) => (
+        <div>
+          {/* When clicked it will handle expanding the list */}
+          <ListItem button onClick={handleExpandClick(text, listkey)}>
+            <ListItemText primary={text} />
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanse[listkey]
+              })}
+              value={text}
+              onClick={handleExpandClick(text, listkey)} //When clicked it will handle expanding the list
+              aria-expanded={expanse[listkey]}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />{" "}
+              {/*Expand icon is located on the right of the category buttons*/}
+            </IconButton>
+          </ListItem>
+          <Divider />
+          <Collapse in={expanse[listkey]} timeout="auto" unmountOnExit>
+            <List>
+              {listkey === 0
+                ? commodities.map((text, commodkey) => (
+                    <div>
+                      <ListItem>
+                        {/*List for commodities checkboxs i.e. Pulses, Oil Seed, Hemp*/}
+                        <Checkbox
+                          checked={expanse[commodkey + commodMarker]}
+                          onChange={handleExpandClick(
+                            text,
+                            commodkey + commodMarker //Constant commodMarker = 3
+                          )}
                         />
-                      </div>
-                    ))
-                  : null}
-                {listkey === 2
-                  ? machinery.map((text, machkey) => (
-                      <div>
-                        <ListItem>
-                          <Checkbox
-                            onChange={handleExpandClick(
-                              text,
-                              machkey + agMarker
-                            )}
-                          />
-                          {text}
-                        </ListItem>
-                        <Collapse
-                          in={expanse[machkey + agMarker]}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          {text === "Agriculture"
-                            ? agriculture.map((text, agkey) => (
-                                <div>
-                                  <ListItem>
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      onChange={handleExpandClick(text, agkey)}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                </div>
-                              ))
-                            : null}
-                          {text === "Construction"
-                            ? construction.map((text, conkey) => (
-                                <div>
-                                  <ListItem>
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      onChange={handleExpandClick(text, conkey)}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                </div>
-                              ))
-                            : null}
-                          {text === "Trucks & Trailers"
-                            ? tnt.map((text, tntkey) => (
-                                <div>
-                                  <ListItem>
-                                    <Checkbox
-                                      style={{ marginLeft: treeMargin }}
-                                      onChange={handleExpandClick(text, tntkey)}
-                                    />
-                                    {text}
-                                  </ListItem>
-                                </div>
-                              ))
-                            : null}
-                        </Collapse>
-                      </div>
-                    ))
-                  : null}
-              </List>
-            </Collapse>
-            <Divider />
-          </div>
-        ))}
-      </List>
-    </Drawer>
+                        {text}
+                      </ListItem>
+                      <Collapse
+                        in={expanse[commodkey + commodMarker]}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        {text === "Pulses"
+                          ? pulses.map((text, pulsekey) => (
+                              <div>
+                                <ListItem>
+                                  {/*Sub-category for pulses i.e. pease, lentil, beans */}
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    checked={expanse[pulsekey + peasMarker]}
+                                    onChange={handleExpandClick(
+                                      text,
+                                      pulsekey + peasMarker //Constant peasMarker = 6
+                                    )}
+                                  />
+                                  {text}
+                                </ListItem>
+                                <Collapse
+                                  in={expanse[pulsekey + peasMarker]}
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  {text === "Lentils"
+                                    ? lentils.map((text, lentilkey) => (
+                                        <div>
+                                          <ListItem>
+                                            {/*Sub-category for pulses i.e. pease, lentil, beans */}
+                                            <Checkbox
+                                              style={{
+                                                marginLeft: treeMargin * 4
+                                              }}
+                                              onChange={handleExpandClick(
+                                                text,
+                                                lentilkey + lentilMarker + 1
+                                              )}
+                                            />
+                                            {text}
+                                          </ListItem>
+                                          <Collapse
+                                            in={
+                                              expanse[
+                                                lentilkey + lentilMarker + 1
+                                              ]
+                                            }
+                                            timeout="auto"
+                                            unmountOnExit
+                                          >
+                                            {text === "Green"
+                                              ? lentilGreen.map(
+                                                  (text, lgkey) => (
+                                                    <div>
+                                                      <ListItem>
+                                                        <Checkbox
+                                                          style={{
+                                                            marginLeft:
+                                                              treeMargin * 8
+                                                          }}
+                                                          onChange={handleExpandClick(
+                                                            text,
+                                                            lgkey + lentilMarker
+                                                          )}
+                                                        />
+                                                        {text}
+                                                      </ListItem>
+                                                    </div>
+                                                  )
+                                                )
+                                              : null}
+                                            {text === "Red"
+                                              ? lentilRed.map((text, ldkey) => (
+                                                  <div>
+                                                    <ListItem>
+                                                      <Checkbox
+                                                        style={{
+                                                          marginLeft:
+                                                            treeMargin * 8
+                                                        }}
+                                                        onChange={handleExpandClick(
+                                                          text,
+                                                          ldkey + lentilMarker
+                                                        )}
+                                                      />
+                                                      {text}
+                                                    </ListItem>
+                                                  </div>
+                                                ))
+                                              : null}
+                                          </Collapse>
+                                        </div>
+                                      ))
+                                    : null}
+                                  {text === "Peas"
+                                    ? peas.map((text, peaskey) => (
+                                        <div>
+                                          <ListItem>
+                                            {/*Sub-category for pulses i.e. pease, lentil, beans */}
+                                            <Checkbox
+                                              style={{
+                                                marginLeft: treeMargin * 4
+                                              }}
+                                              onChange={handleExpandClick(
+                                                text,
+                                                peaskey + peasMarker + 1
+                                              )}
+                                            />
+                                            {text}
+                                          </ListItem>
+                                          <Collapse
+                                            in={
+                                              expanse[peaskey + peasMarker + 1]
+                                            }
+                                            timeout="auto"
+                                            unmountOnExit
+                                          />
+                                        </div>
+                                      ))
+                                    : null}
+                                </Collapse>
+                              </div>
+                            ))
+                          : null}
+                        {text === "Oil Seeds"
+                          ? oilseeds.map((text, oilseedskey) => (
+                              <div>
+                                <ListItem>
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    onChange={handleExpandClick(
+                                      text,
+                                      //Terinary operator to match the location of the mustard seed
+                                      oilseedskey === 5
+                                        ? 12
+                                        : oilseedskey + flaxMarker
+                                    )}
+                                  />
+                                  {text}
+                                </ListItem>
+                                <Collapse
+                                  in={
+                                    expanse[
+                                      oilseedskey === 5
+                                        ? 12
+                                        : oilseedskey + flaxMarker
+                                    ]
+                                  }
+                                  timeout="auto"
+                                  unmountOnExit
+                                >
+                                  {text === "Flax"
+                                    ? flax.map((text, flaxkey) => (
+                                        <div>
+                                          <ListItem>
+                                            <Checkbox
+                                              style={{
+                                                marginLeft: treeMargin * 4
+                                              }}
+                                              onChange={handleExpandClick(
+                                                text,
+                                                flaxkey
+                                              )}
+                                            />
+                                            {text}
+                                          </ListItem>
+                                        </div>
+                                      ))
+                                    : null}
+                                  {text === "Canola"
+                                    ? canola.map((text, canolakey) => (
+                                        <div>
+                                          <ListItem>
+                                            <Checkbox
+                                              style={{
+                                                marginLeft: treeMargin * 4
+                                              }}
+                                              onChange={handleExpandClick(
+                                                text,
+                                                canolakey
+                                              )}
+                                            />
+                                            {text}
+                                          </ListItem>
+                                        </div>
+                                      ))
+                                    : null}
+                                  {text === "Mustard"
+                                    ? mustard.map((text, mustardkey) => (
+                                        <div>
+                                          <ListItem>
+                                            <Checkbox
+                                              style={{
+                                                marginLeft: treeMargin * 4
+                                              }}
+                                              onChange={handleExpandClick(
+                                                text,
+                                                mustardkey
+                                              )}
+                                            />
+                                            {text}
+                                          </ListItem>
+                                        </div>
+                                      ))
+                                    : null}
+                                </Collapse>
+                              </div>
+                            ))
+                          : null}
+                        {text === "Hemp"
+                          ? hemp.map((text, key) => (
+                              <div>
+                                <ListItem>
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    onChange={handleExpandClick(
+                                      text,
+                                      key + commodMarker
+                                    )}
+                                  />
+                                  {text}
+                                </ListItem>
+                              </div>
+                            ))
+                          : null}
+                      </Collapse>
+                    </div>
+                  ))
+                : null}
+              {listkey === 1
+                ? land.map((text, landkey) => (
+                    <div>
+                      <ListItem>
+                        <Checkbox
+                          onChange={handleExpandClick(
+                            text,
+                            landkey + commodMarker
+                          )}
+                        />
+                        {text}
+                      </ListItem>
+                      <Collapse
+                        in={expanse[landkey + commodMarker]}
+                        timeout="auto"
+                        unmountOnExit
+                      />
+                    </div>
+                  ))
+                : null}
+              {listkey === 2
+                ? machinery.map((text, machkey) => (
+                    <div>
+                      <ListItem>
+                        <Checkbox
+                          onChange={handleExpandClick(text, machkey + agMarker)}
+                        />
+                        {text}
+                      </ListItem>
+                      <Collapse
+                        in={expanse[machkey + agMarker]}
+                        timeout="auto"
+                        unmountOnExit
+                      >
+                        {text === "Agriculture"
+                          ? agriculture.map((text, agkey) => (
+                              <div>
+                                <ListItem>
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    onChange={handleExpandClick(text, agkey)}
+                                  />
+                                  {text}
+                                </ListItem>
+                              </div>
+                            ))
+                          : null}
+                        {text === "Construction"
+                          ? construction.map((text, conkey) => (
+                              <div>
+                                <ListItem>
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    onChange={handleExpandClick(text, conkey)}
+                                  />
+                                  {text}
+                                </ListItem>
+                              </div>
+                            ))
+                          : null}
+                        {text === "Trucks & Trailers"
+                          ? tnt.map((text, tntkey) => (
+                              <div>
+                                <ListItem>
+                                  <Checkbox
+                                    style={{ marginLeft: treeMargin }}
+                                    onChange={handleExpandClick(text, tntkey)}
+                                  />
+                                  {text}
+                                </ListItem>
+                              </div>
+                            ))
+                          : null}
+                      </Collapse>
+                    </div>
+                  ))
+                : null}
+            </List>
+          </Collapse>
+          <Divider />
+        </div>
+      ))}
+    </List>
+  );
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            style={{ color: theme.palette.secondary.light }}
+            variant="h6"
+            noWrap
+            align="center"
+          >
+            NGF-Global Marketplace
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="Mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaperMobile
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+    </div>
   );
 }
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
@@ -519,15 +575,32 @@ const styles = theme => ({
     transform: "rotate(180deg)"
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    zIndex: -1
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+      zIndex: 0
+    }
   },
   drawerPaper: {
-    marginTop: 320,
+    marginTop: 310,
     width: drawerWidth,
     zIndex: 0
+  },
+  drawerPaperMobile: {
+    marginTop: 60,
+    width: drawerWidth,
+    zIndex: 0
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
+  },
+  appBar: {
+    backgroundColor: theme.palette.primary.sub,
+    alignItems: "center"
   }
-});
+}));
 
-export default withStyles(styles)(NgfDrawer);
+export default NgfDrawer;

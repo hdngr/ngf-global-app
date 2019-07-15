@@ -32,12 +32,12 @@ function NgfListingHeader(props) {
               alt=""
             />
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <Paper className={classes.paper}>xs=6</Paper>
           </Grid>
           <Grid item xs>
             <Paper className={classes.paper}>xs</Paper>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </div>
@@ -48,20 +48,11 @@ const styles = theme => ({
   root: {
     flex: 1
   },
-  paper1: {
-    flex: 1,
-    padding: theme.spacing(10),
-    textAlign: "center",
-    backgroundImage: `url(${headerLogo})`,
-    backgroundColor: "transparent",
-    backgroundPosition: "cover",
-    color: theme.palette.text.secondary
-  },
   paper: {
     flex: 1,
     padding: theme.spacing(10),
     textAlign: "center",
-    //backgroundColor: "transparent",
+    backgroundColor: "transparent",
     color: theme.palette.text.secondary
   },
   headerbackground: {
