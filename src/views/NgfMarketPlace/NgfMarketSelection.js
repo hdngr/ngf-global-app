@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import backgroundImage from "../images/ngf_background.png";
-import NgfHeroLayout from "./NgfHeroLayout";
+import backgroundImage from "../../images/ngf_background.png";
+import NgfHeroLayout from "../NgfHeroLayout";
 import NgfDrawer from "./NgfDrawer";
-import NgfListings from "./NgfListings";
+import NgfListings from "../NgfListings";
 import NgfListingLayout from "./NgfListingLayout";
+import NgfHeader from "../NgfMarketPlace/NgfListingHeader";
 const drawerWidth = 240;
 function NgfMarketSelection(props) {
   const { classes } = props;
@@ -13,7 +14,7 @@ function NgfMarketSelection(props) {
   return (
     <div>
       <NgfDrawer />
-      <NgfListingLayout />
+      {/* <NgfListingLayout /> */}
       {/* <NgfListings /> */}
     </div>
   );
@@ -24,7 +25,7 @@ const styles = theme => ({
     backgroundImage: `url(${backgroundImage})`,
     backgroundColor: "#7fc7d9", // Average color of the background image.
     backgroundPosition: "cover",
-    height: "93vh"
+    height: "100vh"
   },
   root: {
     display: "flex",

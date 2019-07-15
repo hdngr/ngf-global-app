@@ -174,6 +174,7 @@ function NgfDrawer(props) {
                         <ListItem>
                           {/*List for commodities checkboxs i.e. Pulses, Oil Seed, Hemp*/}
                           <Checkbox
+                            checked={expanse[commodkey + commodMarker]}
                             onChange={handleExpandClick(
                               text,
                               commodkey + commodMarker //Constant commodMarker = 3
@@ -193,6 +194,7 @@ function NgfDrawer(props) {
                                     {/*Sub-category for pulses i.e. pease, lentil, beans */}
                                     <Checkbox
                                       style={{ marginLeft: treeMargin }}
+                                      checked={expanse[pulsekey + peasMarker]}
                                       onChange={handleExpandClick(
                                         text,
                                         pulsekey + peasMarker //Constant peasMarker = 6
@@ -518,30 +520,13 @@ const styles = theme => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    zIndex: -1
   },
   drawerPaper: {
-    marginTop: 70,
-    width: drawerWidth
-  },
-  root: {
-    display: "flex",
-    backgroundColor: theme.palette.secondary.light,
-    overflow: "hidden"
-  },
-  layoutBody: {
-    marginTop: theme.spacing.unit * 10,
-    marginBottom: theme.spacing.unit * 15,
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  item: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: `0px ${theme.spacing.unit * 5}px`
+    marginTop: 320,
+    width: drawerWidth,
+    zIndex: 0
   }
 });
 

@@ -6,8 +6,9 @@ import NgfAccountType from "./views/NgfAccountType";
 import NgfFindMarket from "./views/NgfFindMarket";
 import NgfLogin from "./views/NgfLogin";
 import NgfLocation from "./views/NgfLocation";
-import NgfMarketSelection from "./views/NgfMarketSelection";
+import NgfMarketSelection from "./views/NgfMarketPlace/NgfMarketSelection";
 import NgfFooter from "./views/NgfFooter";
+import NgfHeader from "./views/NgfMarketPlace/NgfListingHeader";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 
@@ -70,6 +71,7 @@ class App extends Component {
               render={props => (
                 <React.Fragment>
                   <AppAppBar mainTitle={this.state.marketTitle} />
+                  <NgfHeader />
                   <NgfMarketSelection />
                   {/* <NgfFooter /> */}
                 </React.Fragment>
