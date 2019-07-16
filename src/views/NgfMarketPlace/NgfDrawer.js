@@ -28,143 +28,289 @@ function NgfDrawer(props) {
     setMobileOpen(!mobileOpen);
   }
 
-  //Categories for the drop down menu
-  const categories = ["Commodities", "Land Types", "Machinery"];
-  //Commodities category
-  const commodities = ["Pulses", "Oil Seeds", "Hemp"];
-  //Commodites subcategories
-  const pulses = ["Peas", "Lentils", "Beans", "Chickpeas"];
-  const peas = ["yellow", "green"];
-  const lentils = ["Green", "Red", "French Green", "Small Brown"];
-  const lentilGreen = ["Laird", "Richlea", "Eston"];
-  const lentilRed = ["Crimson", "Impala"];
-  const oilseeds = [
-    "Flax",
-    "Canola",
-    "Rapeseed",
-    "Safflower",
-    "Sunflower",
-    "Mustard"
-  ];
-  const flax = ["Brown", "Gold"];
-  const canola = ["Winter", "Spring"];
-  const mustard = ["Brown", "Yellow"];
-  const hemp = ["Hay", "CBD", "Biomass", "Isolate", "Crude", "Seed", "Clone"];
-  //Land category
-  const land = ["Tillage", "Pasture", "Mixed"];
-  //Land subcategories
-  //const landTypes = ["For Sale", "For Lease", "Organic"];
-  //Machinery category
-  const machinery = [
-    "Agriculture",
-    "Construction",
-    "Trucks & Trailers",
-    "Attachments"
-  ];
-  //Machhinery subcategories
-  const agriculture = [
-    "Tractors",
-    "Combines",
-    "Headers",
-    "Harvesting",
-    "Hay & Forage",
-    "Chemical Applicators",
-    "Tillage",
-    "Seeding & Planting",
-    "Trailers"
-  ];
-  const construction = [
-    "Skid Steers",
-    "Excavator",
-    "Forklifts",
-    "Backhoes",
-    "Accessories"
-  ];
-  const tnt = [
-    "Trucks",
-    "Flatbed",
-    "Drop Deck",
-    "Liquid Tanker",
-    "Grain Trailer",
-    "Live Bottom",
-    "Reefer",
-    "Dry Van",
-    "Belly Dump"
-  ];
-
   //Uses useState hook for the expansion of the different categories
-  const [expanded, setExpanded] = React.useState({
+  const [categories, setCategories] = React.useState({
     Commodities: false,
-    LandTypes: false,
-    Machinery: false,
+    Land: false,
+    Machinery: false
+  });
+  const [commodities, setCommodities] = React.useState({
     Pulses: false,
-    OilSeeds: false,
-    Hemp: false,
+    ["Oil Seeds"]: false,
+    Hemp: false
+  });
+  const [pulses, setPulses] = React.useState({
     Peas: false,
     Lentils: false,
+    Beans: false,
+    Chickpeas: false
+  });
+  const [peas, setPeas] = React.useState({
+    yellow: false,
+    green: false
+  });
+  const [lentils, setLentils] = React.useState({
     Green: false,
     Red: false,
+    ["French Green"]: false,
+    ["Small Brown"]: false
+  });
+  const [lentilGreen, setLentilGreen] = React.useState({
+    Laird: false,
+    Richlea: false,
+    Eston: false
+  });
+  const [lentilRed, setLentilRed] = React.useState({
+    Crimson: false,
+    Impala: false
+  });
+  const [oilseeds, setOilSeeds] = React.useState({
     Flax: false,
     Canola: false,
-    Mustard: false,
+    Rapeseed: false,
+    Safflower: false,
+    Sunflower: false,
+    Mustard: false
+  });
+  const [flax, setFlax] = React.useState({
+    Brown: false,
+    Gold: false
+  });
+  const [canola, setCanola] = React.useState({
+    Winter: false,
+    Spring: false
+  });
+  const [mustard, setMustard] = React.useState({
+    Brown: false,
+    Yellow: false
+  });
+  const [hemp, setHemp] = React.useState({
+    Hay: false,
+    CBD: false,
+    Biomass: false,
+    Isolate: false,
+    Crude: false,
+    Seed: false,
+    Clone: false
+  });
+  const [land, setLand] = React.useState({
+    Tillage: false,
+    Pasture: false,
+    Mixed: false
+  });
+  const [machinery, setMachinery] = React.useState({
     Agriculture: false,
     Construction: false,
-    TrucksTrailers: false
+    ["Trucks & Trailers"]: false,
+    Attachments: false
   });
-  //Create an array of the object's to iterate
-  const expanse = [
-    expanded.Commodities,
-    expanded.LandTypes,
-    expanded.Machinery,
-    expanded.Pulses,
-    expanded.OilSeeds,
-    expanded.Hemp,
-    expanded.Peas,
-    expanded.Lentils,
-    expanded.Green,
-    expanded.Red,
-    expanded.Flax,
-    expanded.Canola,
-    expanded.Mustard,
-    expanded.Agriculture,
-    expanded.Construction,
-    expanded.TrucksTrailers
-  ];
-  const commodMarker = 3;
-  const peasMarker = 6;
-  const lentilMarker = 7;
-  const flaxMarker = 10;
-  const agMarker = 13;
+  const [agriculture, setAgriculture] = React.useState({
+    Tractors: false,
+    Combines: false,
+    Headers: false,
+    Harvesting: false,
+    ["Hay & Forge"]: false,
+    ["Chemical Applicators"]: false,
+    Tillage: false,
+    ["Seeding & Planting"]: false,
+    Trailers: false
+  });
+  const [construction, setConstruction] = React.useState({
+    ["Skid Steers"]: false,
+    Excavotor: false,
+    Forklifts: false,
+    Backhoes: false,
+    Accessories: false
+  });
+  const [truckstrailers, setTrucksTrailers] = React.useState({
+    Trucks: false,
+    Flatbed: false,
+    ["Drop Deck"]: false,
+    ["Liquid Tanker"]: false,
+    ["Grain Trailer"]: false,
+    ["Live Bottom"]: false,
+    Reefer: false,
+    ["Dry Van"]: false,
+    ["Belly Dump"]: false
+  });
 
-  //Hanles which category is clicked and expanse that category
-  const handleExpandClick = (text, key) => e => {
-    var ntext = text.replace(" ", "");
-    var rtext = ntext.replace("&", "");
+  const handleOtherClick = text => e => {
     console.log(text);
-    console.log("key: " + key);
-    setExpanded({
-      ...expanded,
-      [rtext.replace(" ", "")]: expanse[key] ? false : true
+    Object.keys(categories).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setCategories({ ...categories, [value]: !categories[value] });
+        console.log(categories[value]);
+      }
+      return value;
+    });
+    Object.keys(commodities).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setCommodities({ ...commodities, [value]: !commodities[value] });
+        console.log(commodities[value]);
+      }
+      return value;
+    });
+    Object.keys(pulses).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setPulses({ ...pulses, [value]: !pulses[value] });
+        console.log(pulses[value]);
+      }
+      return value;
+    });
+    Object.keys(peas).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setPeas({ ...peas, [value]: !peas[value] });
+        console.log(peas[value]);
+      }
+      return value;
+    });
+    Object.keys(lentils).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setLentils({ ...lentils, [value]: !lentils[value] });
+        console.log(lentils[value]);
+      }
+      return value;
+    });
+    Object.keys(lentilGreen).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setLentilGreen({ ...lentilGreen, [value]: !lentilGreen[value] });
+        console.log(lentilGreen[value]);
+      }
+      return value;
+    });
+    Object.keys(lentilRed).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setLentilRed({ ...lentilRed, [value]: !lentilRed[value] });
+        console.log(lentilRed[value]);
+      }
+      return value;
+    });
+    Object.keys(oilseeds).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setOilSeeds({ ...oilseeds, [value]: !oilseeds[value] });
+        console.log(oilseeds[value]);
+      }
+      return value;
+    });
+    Object.keys(flax).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setFlax({ ...flax, [value]: !flax[value] });
+        console.log(flax[value]);
+      }
+      return value;
+    });
+    Object.keys(canola).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setCanola({ ...canola, [value]: !canola[value] });
+        console.log(canola[value]);
+      }
+      return value;
+    });
+    Object.keys(mustard).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setMustard({ ...mustard, [value]: !mustard[value] });
+        console.log(mustard[value]);
+      }
+      return value;
+    });
+    Object.keys(hemp).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setHemp({ ...hemp, [value]: !hemp[value] });
+        console.log(hemp[value]);
+      }
+      return value;
+    });
+    Object.keys(land).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setLand({ ...land, [value]: !land[value] });
+        console.log(land[value]);
+      }
+      return value;
+    });
+    Object.keys(machinery).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setMachinery({ ...machinery, [value]: !machinery[value] });
+        console.log(machinery[value]);
+      }
+      return value;
+    });
+    Object.keys(agriculture).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setAgriculture({ ...agriculture, [value]: !agriculture[value] });
+        console.log(agriculture[value]);
+      }
+      return value;
+    });
+    Object.keys(construction).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setConstruction({
+          ...construction,
+          [value]: !construction[value]
+        });
+        console.log(construction[value]);
+      }
+      return value;
+    });
+    Object.keys(truckstrailers).map(value => {
+      if (value === text) {
+        console.log(value);
+
+        setTrucksTrailers({
+          ...truckstrailers,
+          [value]: !truckstrailers[value]
+        });
+        console.log(truckstrailers[value]);
+      }
+      return value;
     });
   };
 
   const drawer = (
     <List>
-      {categories.map((
-        text,
-        listkey //Categories mapped
-      ) => (
+      {Object.keys(categories).map(category => (
         <div>
           {/* When clicked it will handle expanding the list */}
-          <ListItem button onClick={handleExpandClick(text, listkey)}>
-            <ListItemText primary={text} />
+          <ListItem button onClick={handleOtherClick(category)}>
+            <ListItemText primary={category} />
             <IconButton
               className={clsx(classes.expand, {
-                [classes.expandOpen]: expanse[listkey]
+                [classes.expandOpen]: categories[category]
               })}
-              value={text}
-              onClick={handleExpandClick(text, listkey)} //When clicked it will handle expanding the list
-              aria-expanded={expanse[listkey]}
+              value={category}
+              onClick={handleOtherClick(category)} //When clicked it will handle expanding the list
+              aria-expanded={categories[category]}
               aria-label="Show more"
             >
               <ExpandMoreIcon />{" "}
@@ -172,136 +318,131 @@ function NgfDrawer(props) {
             </IconButton>
           </ListItem>
           <Divider />
-          <Collapse in={expanse[listkey]} timeout="auto" unmountOnExit>
+          <Collapse in={categories[category]} timeout="auto" unmountOnExit>
             <List>
-              {listkey === 0
-                ? commodities.map((text, commodkey) => (
+              {category === "Commodities"
+                ? Object.keys(commodities).map((commod, index) => (
                     <div>
                       <ListItem>
                         {/*List for commodities checkboxs i.e. Pulses, Oil Seed, Hemp*/}
                         <Checkbox
-                          checked={expanse[commodkey + commodMarker]}
-                          onChange={handleExpandClick(
-                            text,
-                            commodkey + commodMarker //Constant commodMarker = 3
-                          )}
+                          checked={commodities[commod]}
+                          onChange={handleOtherClick(commod)}
                         />
-                        {text}
+                        {commod}
                       </ListItem>
                       <Collapse
-                        in={expanse[commodkey + commodMarker]}
+                        in={commodities[commod]}
                         timeout="auto"
                         unmountOnExit
                       >
-                        {text === "Pulses"
-                          ? pulses.map((text, pulsekey) => (
+                        {commod === "Pulses"
+                          ? Object.keys(pulses).map((pulse, index) => (
                               <div>
                                 <ListItem>
                                   {/*Sub-category for pulses i.e. pease, lentil, beans */}
                                   <Checkbox
                                     style={{ marginLeft: treeMargin }}
-                                    checked={expanse[pulsekey + peasMarker]}
-                                    onChange={handleExpandClick(
-                                      text,
-                                      pulsekey + peasMarker //Constant peasMarker = 6
+                                    checked={pulses[pulse]}
+                                    onChange={handleOtherClick(
+                                      pulse
+                                      //Constant peasMarker = 6
                                     )}
                                   />
-                                  {text}
+                                  {pulse}
                                 </ListItem>
                                 <Collapse
-                                  in={expanse[pulsekey + peasMarker]}
+                                  in={pulses[pulse]}
                                   timeout="auto"
                                   unmountOnExit
                                 >
-                                  {text === "Lentils"
-                                    ? lentils.map((text, lentilkey) => (
+                                  {pulse === "Lentils"
+                                    ? Object.keys(lentils).map(lentil => (
                                         <div>
                                           <ListItem>
                                             {/*Sub-category for pulses i.e. pease, lentil, beans */}
                                             <Checkbox
+                                              checked={lentils[lentil]}
                                               style={{
                                                 marginLeft: treeMargin * 4
                                               }}
-                                              onChange={handleExpandClick(
-                                                text,
-                                                lentilkey + lentilMarker + 1
+                                              onChange={handleOtherClick(
+                                                lentil
                                               )}
                                             />
-                                            {text}
+                                            {lentil}
                                           </ListItem>
                                           <Collapse
-                                            in={
-                                              expanse[
-                                                lentilkey + lentilMarker + 1
-                                              ]
-                                            }
+                                            in={lentils[lentil]}
                                             timeout="auto"
                                             unmountOnExit
                                           >
-                                            {text === "Green"
-                                              ? lentilGreen.map(
-                                                  (text, lgkey) => (
+                                            {lentil === "Green"
+                                              ? Object.keys(lentilGreen).map(
+                                                  lg => (
                                                     <div>
                                                       <ListItem>
                                                         <Checkbox
+                                                          checked={
+                                                            lentilGreen[lg]
+                                                          }
                                                           style={{
                                                             marginLeft:
                                                               treeMargin * 8
                                                           }}
-                                                          onChange={handleExpandClick(
-                                                            text,
-                                                            lgkey + lentilMarker
+                                                          onChange={handleOtherClick(
+                                                            lg
                                                           )}
                                                         />
-                                                        {text}
+                                                        {lg}
                                                       </ListItem>
                                                     </div>
                                                   )
                                                 )
                                               : null}
-                                            {text === "Red"
-                                              ? lentilRed.map((text, ldkey) => (
-                                                  <div>
-                                                    <ListItem>
-                                                      <Checkbox
-                                                        style={{
-                                                          marginLeft:
-                                                            treeMargin * 8
-                                                        }}
-                                                        onChange={handleExpandClick(
-                                                          text,
-                                                          ldkey + lentilMarker
-                                                        )}
-                                                      />
-                                                      {text}
-                                                    </ListItem>
-                                                  </div>
-                                                ))
+                                            {lentil === "Red"
+                                              ? Object.keys(lentilRed).map(
+                                                  lr => (
+                                                    <div>
+                                                      <ListItem>
+                                                        <Checkbox
+                                                          checked={
+                                                            lentilRed[lr]
+                                                          }
+                                                          style={{
+                                                            marginLeft:
+                                                              treeMargin * 8
+                                                          }}
+                                                          onChange={handleOtherClick(
+                                                            lr
+                                                          )}
+                                                        />
+                                                        {lr}
+                                                      </ListItem>
+                                                    </div>
+                                                  )
+                                                )
                                               : null}
                                           </Collapse>
                                         </div>
                                       ))
                                     : null}
-                                  {text === "Peas"
-                                    ? peas.map((text, peaskey) => (
+                                  {pulse === "Peas"
+                                    ? Object.keys(peas).map(pea => (
                                         <div>
                                           <ListItem>
                                             {/*Sub-category for pulses i.e. pease, lentil, beans */}
                                             <Checkbox
+                                              checked={peas[pea]}
                                               style={{
                                                 marginLeft: treeMargin * 4
                                               }}
-                                              onChange={handleExpandClick(
-                                                text,
-                                                peaskey + peasMarker + 1
-                                              )}
+                                              onChange={handleOtherClick(pea)}
                                             />
-                                            {text}
+                                            {pea}
                                           </ListItem>
                                           <Collapse
-                                            in={
-                                              expanse[peaskey + peasMarker + 1]
-                                            }
+                                            in={null}
                                             timeout="auto"
                                             unmountOnExit
                                           />
@@ -312,83 +453,66 @@ function NgfDrawer(props) {
                               </div>
                             ))
                           : null}
-                        {text === "Oil Seeds"
-                          ? oilseeds.map((text, oilseedskey) => (
+                        {commod === "Oil Seeds"
+                          ? Object.keys(oilseeds).map(oilseed => (
                               <div>
                                 <ListItem>
                                   <Checkbox
+                                    checked={oilseeds[oilseed]}
                                     style={{ marginLeft: treeMargin }}
-                                    onChange={handleExpandClick(
-                                      text,
-                                      //Terinary operator to match the location of the mustard seed
-                                      oilseedskey === 5
-                                        ? 12
-                                        : oilseedskey + flaxMarker
-                                    )}
+                                    onChange={handleOtherClick(oilseed)}
                                   />
-                                  {text}
+                                  {oilseed}
                                 </ListItem>
                                 <Collapse
-                                  in={
-                                    expanse[
-                                      oilseedskey === 5
-                                        ? 12
-                                        : oilseedskey + flaxMarker
-                                    ]
-                                  }
+                                  in={oilseeds[oilseed]}
                                   timeout="auto"
                                   unmountOnExit
                                 >
-                                  {text === "Flax"
-                                    ? flax.map((text, flaxkey) => (
+                                  {oilseed === "Flax"
+                                    ? Object.keys(flax).map(fx => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
+                                              checked={flax[fx]}
                                               style={{
                                                 marginLeft: treeMargin * 4
                                               }}
-                                              onChange={handleExpandClick(
-                                                text,
-                                                flaxkey
-                                              )}
+                                              onChange={handleOtherClick(fx)}
                                             />
-                                            {text}
+                                            {fx}
                                           </ListItem>
                                         </div>
                                       ))
                                     : null}
-                                  {text === "Canola"
-                                    ? canola.map((text, canolakey) => (
+                                  {oilseed === "Canola"
+                                    ? Object.keys(canola).map(ca => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
+                                              checked={canola[ca]}
                                               style={{
                                                 marginLeft: treeMargin * 4
                                               }}
-                                              onChange={handleExpandClick(
-                                                text,
-                                                canolakey
-                                              )}
+                                              onChange={handleOtherClick(ca)}
                                             />
-                                            {text}
+                                            {ca}
                                           </ListItem>
                                         </div>
                                       ))
                                     : null}
-                                  {text === "Mustard"
-                                    ? mustard.map((text, mustardkey) => (
+                                  {oilseed === "Mustard"
+                                    ? Object.keys(mustard).map(md => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
+                                              checked={mustard[md]}
                                               style={{
                                                 marginLeft: treeMargin * 4
                                               }}
-                                              onChange={handleExpandClick(
-                                                text,
-                                                mustardkey
-                                              )}
+                                              onChange={handleOtherClick(md)}
                                             />
-                                            {text}
+                                            {md}
                                           </ListItem>
                                         </div>
                                       ))
@@ -397,18 +521,16 @@ function NgfDrawer(props) {
                               </div>
                             ))
                           : null}
-                        {text === "Hemp"
-                          ? hemp.map((text, key) => (
+                        {commod === "Hemp"
+                          ? Object.keys(hemp).map(hp => (
                               <div>
                                 <ListItem>
                                   <Checkbox
+                                    checked={hemp[hp]}
                                     style={{ marginLeft: treeMargin }}
-                                    onChange={handleExpandClick(
-                                      text,
-                                      key + commodMarker
-                                    )}
+                                    onChange={handleOtherClick(hp)}
                                   />
-                                  {text}
+                                  {hp}
                                 </ListItem>
                               </div>
                             ))
@@ -417,75 +539,69 @@ function NgfDrawer(props) {
                     </div>
                   ))
                 : null}
-              {listkey === 1
-                ? land.map((text, landkey) => (
+              {category === "Land"
+                ? Object.keys(land).map(ld => (
                     <div>
                       <ListItem>
                         <Checkbox
-                          onChange={handleExpandClick(
-                            text,
-                            landkey + commodMarker
-                          )}
+                          checked={land[ld]}
+                          onChange={handleOtherClick(ld)}
                         />
-                        {text}
+                        {ld}
                       </ListItem>
-                      <Collapse
-                        in={expanse[landkey + commodMarker]}
-                        timeout="auto"
-                        unmountOnExit
-                      />
+                      <Collapse in={land[ld]} timeout="auto" unmountOnExit />
                     </div>
                   ))
                 : null}
-              {listkey === 2
-                ? machinery.map((text, machkey) => (
+              {category === "Machinery"
+                ? Object.keys(machinery).map(mh => (
                     <div>
                       <ListItem>
                         <Checkbox
-                          onChange={handleExpandClick(text, machkey + agMarker)}
+                          checked={machinery[mh]}
+                          onChange={handleOtherClick(mh)}
                         />
-                        {text}
+                        {mh}
                       </ListItem>
-                      <Collapse
-                        in={expanse[machkey + agMarker]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        {text === "Agriculture"
-                          ? agriculture.map((text, agkey) => (
+                      <Collapse in={machinery[mh]} timeout="auto" unmountOnExit>
+                        {mh === "Agriculture"
+                          ? Object.keys(agriculture).map(ag => (
                               <div>
                                 <ListItem>
                                   <Checkbox
+                                    checked={agriculture[ag]}
                                     style={{ marginLeft: treeMargin }}
-                                    onChange={handleExpandClick(text, agkey)}
+                                    onChange={handleOtherClick(ag)}
                                   />
-                                  {text}
+                                  {ag}
                                 </ListItem>
                               </div>
                             ))
                           : null}
-                        {text === "Construction"
-                          ? construction.map((text, conkey) => (
+                        {mh === "Construction"
+                          ? Object.keys(construction).map(ct => (
                               <div>
                                 <ListItem>
                                   <Checkbox
+                                    checked={construction[ct]}
                                     style={{ marginLeft: treeMargin }}
-                                    onChange={handleExpandClick(text, conkey)}
+                                    onChange={handleOtherClick(ct)}
                                   />
-                                  {text}
+                                  {ct}
                                 </ListItem>
                               </div>
                             ))
                           : null}
-                        {text === "Trucks & Trailers"
-                          ? tnt.map((text, tntkey) => (
+                        {mh === "Trucks & Trailers"
+                          ? Object.keys(truckstrailers).map(tnt => (
                               <div>
                                 <ListItem>
                                   <Checkbox
+                                    checked={truckstrailers[tnt]}
                                     style={{ marginLeft: treeMargin }}
-                                    onChange={handleExpandClick(text, tntkey)}
+                                    onChange={handleOtherClick(tnt)}
                                   />
-                                  {text}
+                                  {tnt}
                                 </ListItem>
                               </div>
                             ))
@@ -575,6 +691,7 @@ const useStyles = makeStyles(theme => ({
     transform: "rotate(180deg)"
   },
   drawer: {
+    height: 10,
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
       flexShrink: 0,
@@ -582,7 +699,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   drawerPaper: {
-    marginTop: 310,
+    position: "absolute",
+    top: 310, //310
     width: drawerWidth,
     zIndex: 0
   },

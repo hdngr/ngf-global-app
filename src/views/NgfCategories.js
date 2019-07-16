@@ -127,7 +127,7 @@ function NgfCategories(props) {
     {
       url:
         "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-      title: "Commodities",
+      title: "commodities",
       width: "40%"
     },
     {

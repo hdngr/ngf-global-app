@@ -76,7 +76,7 @@ function NgfValues(props) {
                 </g>
               </svg>
               <Typography variant="h6" className={classes.title}>
-                Commodities
+                commodities
               </Typography>
               <Typography variant="h6">
                 {"Specialty Crops / Hemp / Cannabis"}
