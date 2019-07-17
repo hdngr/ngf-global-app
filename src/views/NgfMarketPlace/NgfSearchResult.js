@@ -86,7 +86,7 @@ function NgfSearchResult(props) {
               </Grid>
             </Grid>
             <Grid>
-              <Typography align="center" variant="subtitle1">
+              <Typography textAlign="center" variant="subtitle1">
                 Quantity: <br />
                 7,000 Bushels
               </Typography>
@@ -96,8 +96,27 @@ function NgfSearchResult(props) {
                 size="large"
                 className={classes.button}
               >
+                View Map
+              </Button>
+              <br />
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+              >
                 Finance
               </Button>
+              <br />
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                className={classes.button}
+              >
+                Login
+              </Button>
+              <br />
             </Grid>
           </Grid>
         </Grid>
