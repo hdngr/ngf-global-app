@@ -20,7 +20,7 @@ const drawerWidth = 240;
 const treeMargin = 10;
 function NgfDrawer(props) {
   const { container } = props;
-  const classes = useStyles();
+  const classes = useStyles(props);
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -28,42 +28,56 @@ function NgfDrawer(props) {
     setMobileOpen(!mobileOpen);
   }
 
-  //Uses useState hook for the expansion of the different categories
+  const Categories = ["Commodities", "Land", "Machinery"];
   const [categories, setCategories] = React.useState({
     Commodities: false,
     Land: false,
     Machinery: false
   });
+  const Commodities = ["Pulses", "Oil Seeds", "Hemp"];
   const [commodities, setCommodities] = React.useState({
     Pulses: false,
-    ["Oil Seeds"]: false,
+    "Oil Seeds": false,
     Hemp: false
   });
+  const Pulses = ["Peas", "Lentils", "Beans", "Chickpeas"];
   const [pulses, setPulses] = React.useState({
     Peas: false,
     Lentils: false,
     Beans: false,
     Chickpeas: false
   });
+  const Peas = ["Yellow", "Green"];
   const [peas, setPeas] = React.useState({
     yellow: false,
     green: false
   });
+  const Lentils = ["Green", "Red", "French Green", "Small Brown"];
   const [lentils, setLentils] = React.useState({
     Green: false,
     Red: false,
-    ["French Green"]: false,
-    ["Small Brown"]: false
+    "French Green": false,
+    "Small Brown": false
   });
+  const LentilGreen = ["Laird", "Richlea", "Eston"];
   const [lentilGreen, setLentilGreen] = React.useState({
     Laird: false,
     Richlea: false,
     Eston: false
   });
+  const LentilRed = ["Crimson", "Impala"];
   const [lentilRed, setLentilRed] = React.useState({
     Crimson: false,
     Impala: false
   });
+  const OilSeeds = [
+    "Flax",
+    "Canola",
+    "Rapeseed",
+    "Safflower",
+    "Sunflower",
+    "Mustard"
+  ];
   const [oilseeds, setOilSeeds] = React.useState({
     Flax: false,
     Canola: false,
@@ -72,18 +86,22 @@ function NgfDrawer(props) {
     Sunflower: false,
     Mustard: false
   });
+  const Flax = ["Brown", "Gold"];
   const [flax, setFlax] = React.useState({
     Brown: false,
     Gold: false
   });
+  const Canola = ["Winter", "Spring"];
   const [canola, setCanola] = React.useState({
     Winter: false,
     Spring: false
   });
+  const Mustard = ["Brown", "Yellow"];
   const [mustard, setMustard] = React.useState({
     Brown: false,
     Yellow: false
   });
+  const Hemp = ["Hay", "CBD", "Biomass", "Isolate", "Crude", "Seed", "Clone"];
   const [hemp, setHemp] = React.useState({
     Hay: false,
     CBD: false,
@@ -93,48 +111,84 @@ function NgfDrawer(props) {
     Seed: false,
     Clone: false
   });
+  const Land = ["Tillage", "Pasture", "Mixed"];
   const [land, setLand] = React.useState({
     Tillage: false,
     Pasture: false,
     Mixed: false
   });
+  const Machinery = [
+    "Agriculture",
+    "Construction",
+    "Trucks & Trailers",
+    "Attachments"
+  ];
   const [machinery, setMachinery] = React.useState({
     Agriculture: false,
     Construction: false,
-    ["Trucks & Trailers"]: false,
+    "Trucks & Trailers": false,
     Attachments: false
   });
+  const Agriculture = [
+    "Tractors",
+    "Combines",
+    "Headers",
+    "Harvesting",
+    "Hay & Forge",
+    "Chemical Applicators",
+    "Tillage",
+    "Seeding & Planting",
+    "Trailers"
+  ];
   const [agriculture, setAgriculture] = React.useState({
     Tractors: false,
     Combines: false,
     Headers: false,
     Harvesting: false,
-    ["Hay & Forge"]: false,
-    ["Chemical Applicators"]: false,
+    "Hay & Forge": false,
+    "Chemical Applicators": false,
     Tillage: false,
-    ["Seeding & Planting"]: false,
+    "Seeding & Planting": false,
     Trailers: false
   });
+  const Construction = [
+    "Skid Steers",
+    "Excavator",
+    "Forklifts",
+    "Backhoes",
+    "Accessories"
+  ];
   const [construction, setConstruction] = React.useState({
-    ["Skid Steers"]: false,
-    Excavotor: false,
+    "Skid Steers": false,
+    Excavator: false,
     Forklifts: false,
     Backhoes: false,
     Accessories: false
   });
+  const TrucksTrailers = [
+    "Trucks",
+    "Flatbed",
+    "Drop Deck",
+    "Liquid Tanker",
+    "Grain Trailer",
+    "Live Bottom",
+    "Reefer",
+    "Dry Van",
+    "Belly Dump"
+  ];
   const [truckstrailers, setTrucksTrailers] = React.useState({
     Trucks: false,
     Flatbed: false,
-    ["Drop Deck"]: false,
-    ["Liquid Tanker"]: false,
-    ["Grain Trailer"]: false,
-    ["Live Bottom"]: false,
+    "Drop Deck": false,
+    "Liquid Tanker": false,
+    "Grain Trailer": false,
+    "Live Bottom": false,
     Reefer: false,
-    ["Dry Van"]: false,
-    ["Belly Dump"]: false
+    "Dry Van": false,
+    "Belly Dump": false
   });
 
-  const handleOtherClick = text => e => {
+  const handleOtherClick = text => event => {
     console.log(text);
     Object.keys(categories).map(value => {
       if (value === text) {
@@ -299,7 +353,7 @@ function NgfDrawer(props) {
 
   const drawer = (
     <List>
-      {Object.keys(categories).map(category => (
+      {Categories.map(category => (
         <div>
           {/* When clicked it will handle expanding the list */}
           <ListItem button onClick={handleOtherClick(category)}>
@@ -309,6 +363,7 @@ function NgfDrawer(props) {
                 [classes.expandOpen]: categories[category]
               })}
               value={category}
+              unmountOnExit
               onClick={handleOtherClick(category)} //When clicked it will handle expanding the list
               aria-expanded={categories[category]}
               aria-label="Show more"
@@ -318,30 +373,28 @@ function NgfDrawer(props) {
             </IconButton>
           </ListItem>
           <Divider />
-          <Collapse in={categories[category]} timeout="auto" unmountOnExit>
+          <Collapse in={categories[category]} timeout="auto">
             <List>
               {category === "Commodities"
-                ? Object.keys(commodities).map((commod, index) => (
+                ? Commodities.map((commod, index) => (
                     <div>
                       <ListItem>
                         {/*List for commodities checkboxs i.e. Pulses, Oil Seed, Hemp*/}
                         <Checkbox
                           checked={commodities[commod]}
                           onChange={handleOtherClick(commod)}
+                          unmountOnExit
                         />
                         {commod}
                       </ListItem>
-                      <Collapse
-                        in={commodities[commod]}
-                        timeout="auto"
-                        unmountOnExit
-                      >
+                      <Collapse in={commodities[commod]} timeout="auto">
                         {commod === "Pulses"
-                          ? Object.keys(pulses).map((pulse, index) => (
+                          ? Pulses.map((pulse, index) => (
                               <div>
                                 <ListItem>
                                   {/*Sub-category for pulses i.e. pease, lentil, beans */}
                                   <Checkbox
+                                    unmountOnExit
                                     style={{ marginLeft: treeMargin }}
                                     checked={pulses[pulse]}
                                     onChange={handleOtherClick(
@@ -351,13 +404,9 @@ function NgfDrawer(props) {
                                   />
                                   {pulse}
                                 </ListItem>
-                                <Collapse
-                                  in={pulses[pulse]}
-                                  timeout="auto"
-                                  unmountOnExit
-                                >
+                                <Collapse in={pulses[pulse]} timeout="auto">
                                   {pulse === "Lentils"
-                                    ? Object.keys(lentils).map(lentil => (
+                                    ? Lentils.map(lentil => (
                                         <div>
                                           <ListItem>
                                             {/*Sub-category for pulses i.e. pease, lentil, beans */}
@@ -375,60 +424,53 @@ function NgfDrawer(props) {
                                           <Collapse
                                             in={lentils[lentil]}
                                             timeout="auto"
-                                            unmountOnExit
                                           >
                                             {lentil === "Green"
-                                              ? Object.keys(lentilGreen).map(
-                                                  lg => (
-                                                    <div>
-                                                      <ListItem>
-                                                        <Checkbox
-                                                          checked={
-                                                            lentilGreen[lg]
-                                                          }
-                                                          style={{
-                                                            marginLeft:
-                                                              treeMargin * 8
-                                                          }}
-                                                          onChange={handleOtherClick(
-                                                            lg
-                                                          )}
-                                                        />
-                                                        {lg}
-                                                      </ListItem>
-                                                    </div>
-                                                  )
-                                                )
+                                              ? LentilGreen.map(lg => (
+                                                  <div>
+                                                    <ListItem>
+                                                      <Checkbox
+                                                        checked={
+                                                          lentilGreen[lg]
+                                                        }
+                                                        style={{
+                                                          marginLeft:
+                                                            treeMargin * 8
+                                                        }}
+                                                        onChange={handleOtherClick(
+                                                          lg
+                                                        )}
+                                                      />
+                                                      {lg}
+                                                    </ListItem>
+                                                  </div>
+                                                ))
                                               : null}
                                             {lentil === "Red"
-                                              ? Object.keys(lentilRed).map(
-                                                  lr => (
-                                                    <div>
-                                                      <ListItem>
-                                                        <Checkbox
-                                                          checked={
-                                                            lentilRed[lr]
-                                                          }
-                                                          style={{
-                                                            marginLeft:
-                                                              treeMargin * 8
-                                                          }}
-                                                          onChange={handleOtherClick(
-                                                            lr
-                                                          )}
-                                                        />
-                                                        {lr}
-                                                      </ListItem>
-                                                    </div>
-                                                  )
-                                                )
+                                              ? LentilRed.map(lr => (
+                                                  <div>
+                                                    <ListItem>
+                                                      <Checkbox
+                                                        checked={lentilRed[lr]}
+                                                        style={{
+                                                          marginLeft:
+                                                            treeMargin * 8
+                                                        }}
+                                                        onChange={handleOtherClick(
+                                                          lr
+                                                        )}
+                                                      />
+                                                      {lr}
+                                                    </ListItem>
+                                                  </div>
+                                                ))
                                               : null}
                                           </Collapse>
                                         </div>
                                       ))
                                     : null}
                                   {pulse === "Peas"
-                                    ? Object.keys(peas).map(pea => (
+                                    ? Peas.map(pea => (
                                         <div>
                                           <ListItem>
                                             {/*Sub-category for pulses i.e. pease, lentil, beans */}
@@ -441,11 +483,7 @@ function NgfDrawer(props) {
                                             />
                                             {pea}
                                           </ListItem>
-                                          <Collapse
-                                            in={null}
-                                            timeout="auto"
-                                            unmountOnExit
-                                          />
+                                          <Collapse in={null} timeout="auto" />
                                         </div>
                                       ))
                                     : null}
@@ -454,7 +492,7 @@ function NgfDrawer(props) {
                             ))
                           : null}
                         {commod === "Oil Seeds"
-                          ? Object.keys(oilseeds).map(oilseed => (
+                          ? OilSeeds.map(oilseed => (
                               <div>
                                 <ListItem>
                                   <Checkbox
@@ -464,13 +502,9 @@ function NgfDrawer(props) {
                                   />
                                   {oilseed}
                                 </ListItem>
-                                <Collapse
-                                  in={oilseeds[oilseed]}
-                                  timeout="auto"
-                                  unmountOnExit
-                                >
+                                <Collapse in={oilseeds[oilseed]} timeout="auto">
                                   {oilseed === "Flax"
-                                    ? Object.keys(flax).map(fx => (
+                                    ? Flax.map(fx => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
@@ -486,7 +520,7 @@ function NgfDrawer(props) {
                                       ))
                                     : null}
                                   {oilseed === "Canola"
-                                    ? Object.keys(canola).map(ca => (
+                                    ? Canola.map(ca => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
@@ -502,7 +536,7 @@ function NgfDrawer(props) {
                                       ))
                                     : null}
                                   {oilseed === "Mustard"
-                                    ? Object.keys(mustard).map(md => (
+                                    ? Mustard.map(md => (
                                         <div>
                                           <ListItem>
                                             <Checkbox
@@ -522,7 +556,7 @@ function NgfDrawer(props) {
                             ))
                           : null}
                         {commod === "Hemp"
-                          ? Object.keys(hemp).map(hp => (
+                          ? Hemp.map(hp => (
                               <div>
                                 <ListItem>
                                   <Checkbox
@@ -540,7 +574,7 @@ function NgfDrawer(props) {
                   ))
                 : null}
               {category === "Land"
-                ? Object.keys(land).map(ld => (
+                ? Land.map(ld => (
                     <div>
                       <ListItem>
                         <Checkbox
@@ -549,12 +583,12 @@ function NgfDrawer(props) {
                         />
                         {ld}
                       </ListItem>
-                      <Collapse in={land[ld]} timeout="auto" unmountOnExit />
+                      <Collapse in={land[ld]} timeout="auto" />
                     </div>
                   ))
                 : null}
               {category === "Machinery"
-                ? Object.keys(machinery).map(mh => (
+                ? Machinery.map(mh => (
                     <div>
                       <ListItem>
                         <Checkbox
@@ -563,9 +597,9 @@ function NgfDrawer(props) {
                         />
                         {mh}
                       </ListItem>
-                      <Collapse in={machinery[mh]} timeout="auto" unmountOnExit>
+                      <Collapse in={machinery[mh]} timeout="auto">
                         {mh === "Agriculture"
-                          ? Object.keys(agriculture).map(ag => (
+                          ? Agriculture.map(ag => (
                               <div>
                                 <ListItem>
                                   <Checkbox
@@ -579,7 +613,7 @@ function NgfDrawer(props) {
                             ))
                           : null}
                         {mh === "Construction"
-                          ? Object.keys(construction).map(ct => (
+                          ? Construction.map(ct => (
                               <div>
                                 <ListItem>
                                   <Checkbox
@@ -593,7 +627,7 @@ function NgfDrawer(props) {
                             ))
                           : null}
                         {mh === "Trucks & Trailers"
-                          ? Object.keys(truckstrailers).map(tnt => (
+                          ? TrucksTrailers.map(tnt => (
                               <div>
                                 <ListItem>
                                   <Checkbox

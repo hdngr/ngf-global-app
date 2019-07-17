@@ -2,7 +2,6 @@ import React from "react";
 import backgroundImage from "../../images/ngf_header.png";
 import headerLogo from "../../images/ngflogoImage3.png";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 function NgfListingHeader(props) {
