@@ -15,6 +15,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
 
 const drawerWidth = 240;
 const treeMargin = 10;
@@ -754,5 +755,9 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   }
 }));
+
+NgfDrawer.propTypes = {
+  state: PropTypes.object.isRequired
+};
 
 export default NgfDrawer;

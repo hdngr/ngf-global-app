@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useState, Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import backgroundImage from "../../images/ngf_background.png";
 import NgfDrawer from "./NgfDrawer";
+import NgfListings from "./NgfSearchResult";
+import NgfSearchResult from "./NgfSearchResult";
+import NgfHeader from "../NgfMarketPlace/NgfListingHeader";
+import { render } from "react-dom";
 const drawerWidth = 240;
-function NgfMarketSelection(props) {
-  //const { classes } = props;
+class NgfMarketSelection extends Component {
+  state = {
+    resultTitle: "Commodity",
+    results: 0,
+    curpage: 0,
+    numpages: 0
+  };
 
-  return (
-    <div>
-      <NgfDrawer />
-      {/* <NgfListingLayout /> */}
-      {/* <NgfListings /> */}
-    </div>
-  );
+  render() {
+    //const { classes } = this.props;
+    return (
+      <div>
+        <NgfDrawer />
+        <NgfSearchResult props={this.state} />
+      </div>
+    );
+  }
 }
 const styles = theme => ({
   background: {
