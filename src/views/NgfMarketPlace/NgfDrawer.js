@@ -751,7 +751,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   appBar: {
-    backgroundColor: theme.palette.primary.sub,
+    backgroundColor: theme.palette.secondary.dark,
     alignItems: "center"
   }
 }));
