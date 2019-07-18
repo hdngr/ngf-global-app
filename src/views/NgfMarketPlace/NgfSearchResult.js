@@ -264,6 +264,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px"
   },
   gridBorder: {
+    backgroundColor: "#fefefe",
     borderWidth: 1,
     borderColor: "#1e1e1e",
     borderStyle: "solid",
