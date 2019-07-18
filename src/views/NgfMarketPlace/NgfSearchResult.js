@@ -190,11 +190,25 @@ function NgfSearchResult(props) {
                   Cert. Weed Free: {"Yes"} <br />
                 </Typography>
               </Grid>
-              <Grid item align="center">
-                <Typography variant="subtitle1">
-                  Soil Samples: {"Yes"} <br />
+              {/* <Grid item container direction="row"> */}
+              <Grid item container direction="row">
+                <Typography
+                  style={{ backgroundColor: "Red" }}
+                  variant="subtitle1"
+                >
+                  Soil Samples:
                 </Typography>
+                <Grid sm item>
+                  <Typography
+                    style={{ backgroundColor: "yellow" }}
+                    align="center"
+                    variant="subtitle1"
+                  >
+                    {"Yes"}
+                  </Typography>
+                </Grid>
               </Grid>
+              {/* </Grid> */}
             </Grid>
             <Grid>
               <Typography textAlign="center" variant="subtitle1">
@@ -244,7 +258,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     marginTop: 20,
     margin: "auto",
-    maxWidth: 1000,
+    maxWidth: 900,
     backgroundColor: theme.palette.secondary.dark
   },
   button: {

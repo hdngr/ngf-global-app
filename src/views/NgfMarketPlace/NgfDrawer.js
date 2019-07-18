@@ -357,7 +357,11 @@ function NgfDrawer(props) {
       {Categories.map(category => (
         <div>
           {/* When clicked it will handle expanding the list */}
-          <ListItem button onClick={handleOtherClick(category)}>
+          <ListItem
+            button
+            className={classes.categoryBackground}
+            onClick={handleOtherClick(category)}
+          >
             <ListItemText primary={category} />
             <IconButton
               className={clsx(classes.expand, {
@@ -735,7 +739,7 @@ const useStyles = makeStyles(theme => ({
   },
   drawerPaper: {
     position: "absolute",
-    top: 310, //310
+    top: 310,
     width: drawerWidth,
     zIndex: 0
   },
@@ -753,6 +757,9 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     backgroundColor: theme.palette.secondary.dark,
     alignItems: "center"
+  },
+  categoryBackground: {
+    backgroundColor: theme.palette.secondary.main
   }
 }));
 
