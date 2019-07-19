@@ -606,7 +606,7 @@ const useStyles = makeStyles(theme => ({
   },
   searchButton: {
     marginLeft: theme.spacing(2),
-    marginBottom: theme.spacing(1),
+    marginBottom: 4,
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.secondary.light
   },
