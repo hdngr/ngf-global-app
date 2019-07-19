@@ -21,6 +21,7 @@
     "craco-cesium": "^1.1.1",
     "craco-plugin-react-hot-reload": "^0.0.3",
     "file-loader": "^4.0.0",
+    "google-map-react": "^1.1.4",
     "html-loader": "^0.5.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

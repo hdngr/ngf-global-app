@@ -70,8 +70,8 @@ class App extends Component {
               path="/Market"
               render={props => (
                 <React.Fragment>
-                  <AppAppBar mainTitle={this.state.marketTitle} />
-                  <NgfHeader />
+                  {/* <AppAppBar mainTitle={this.state.marketTitle} /> */}
+                  {/* <NgfHeader /> */}
                   <NgfMarketSelection />
                   {/* <NgfFooter /> */}
                 </React.Fragment>

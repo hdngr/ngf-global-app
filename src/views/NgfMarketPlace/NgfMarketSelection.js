@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import backgroundImage from "../../images/ngf_background.png";
 import NgfDrawer from "./NgfDrawer";
-import NgfListings from "./NgfSearchResult";
 import NgfSearchResult from "./NgfSearchResult";
-import NgfHeader from "../NgfMarketPlace/NgfListingHeader";
+import NgfAppBar from "./NgfAppBar";
+import NgfSearchBar from "./NgfSearchBar";
+
 import { render } from "react-dom";
 const drawerWidth = 240;
 class NgfMarketSelection extends Component {
@@ -20,8 +21,10 @@ class NgfMarketSelection extends Component {
     //const { classes } = this.props;
     return (
       <div>
-        <NgfDrawer />
-        <NgfSearchResult props={this.state} />
+        <NgfAppBar />
+        <NgfSearchBar />
+        {/* <NgfDrawer /> */}
+        {/* <NgfSearchResult props={this.state} /> */}
       </div>
     );
   }
