@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end"
   },
   pipe: {
+    color: theme.palette.primary.main,
     marginRight: theme.spacing(2)
   },
   img: {
