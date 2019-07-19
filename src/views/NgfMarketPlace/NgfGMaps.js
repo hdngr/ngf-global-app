@@ -17,7 +17,7 @@ class NgfGMaps extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: "100vh", width: "50%" }}>
+      <div style={{ height: "100%", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: GMAPS_API_KEY /* YOUR KEY HERE */
