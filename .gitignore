@@ -10,7 +10,6 @@
 
 # production
 /build
-/src/const/gmaps_api_key.js
 
 # misc
 .DS_Store
