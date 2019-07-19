@@ -28,6 +28,12 @@ import OrganicIcon from "@material-ui/icons/BrightnessLow";
 import GmoIcon from "@material-ui/icons/BubbleChart";
 import SaleIcon from "@material-ui/icons/MonetizationOn";
 export default function NgfSearchBar(props) {
+  const [autocompletestate, setAutoCompleteState] = React.useState({
+    activeSuggestion: 0,
+    filteredSuggestions: [],
+    showSuggestions: false,
+    userInput: ""
+  });
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [banchorEl, setBAnchorEl] = React.useState(null);
@@ -82,11 +88,12 @@ export default function NgfSearchBar(props) {
 
   const [listedTypes, setListedTypes] = React.useState({
     type: "Listing Type",
-    bushels: "Bushels",
+    bushels: "Select Bushels",
+    price: "Select Price Range",
     gmo: "GMO",
     organic: "Organic",
-    land: "select sale",
-    machinery: "select sale"
+    land: "Select Buy/Lease",
+    machinery: "Select Buy/Rent/Lease"
   });
 
   const handleListingClick = listing => e => {
@@ -95,6 +102,10 @@ export default function NgfSearchBar(props) {
   };
   const handleBushelClick = bushel => e => {
     setListedTypes({ ...listedTypes, bushels: bushel });
+    handleClose2();
+  };
+  const handlePriceClick = (price, from) => e => {
+    setListedTypes({ ...listedTypes, price: price });
     handleClose2();
   };
   const handleGmoClick = GMO => e => {
@@ -191,7 +202,9 @@ export default function NgfSearchBar(props) {
               </StyledMenuItem>
             </StyledMenu>
 
-            {listedTypes.type === "Commodities" ? (
+            {listedTypes.type === "Commodities" ||
+            listedTypes.type === "Land" ||
+            listedTypes.type === "Machinery" ? (
               <Button
                 className={classes.searchButton}
                 aria-controls="bushel-menu"
@@ -200,9 +213,16 @@ export default function NgfSearchBar(props) {
                 color="primary"
                 onClick={handleClick2}
               >
-                <BushelIcon />
+                {listedTypes.type === "Commodities" ? (
+                  <BushelIcon />
+                ) : (
+                  <MoneyIcon />
+                )}
+
                 <Typography variant="h5" noWrap>
-                  {listedTypes.bushels}
+                  {listedTypes.type === "Commodities"
+                    ? listedTypes.bushels
+                    : listedTypes.price}
                 </Typography>
               </Button>
             ) : null}
@@ -284,21 +304,63 @@ export default function NgfSearchBar(props) {
                 horizontal: "center"
               }}
             >
-              <StyledMenuItem onClick={handleBushelClick("1,000 - 5,000")}>
+              <StyledMenuItem
+                onClick={
+                  listedTypes.type === "Commodities"
+                    ? handleBushelClick("1,000 - 5,000")
+                    : null || listedTypes.type === "Land"
+                    ? handlePriceClick("1,000 - 5,000", listedTypes.type)
+                    : null || listedTypes.type === "Machinery"
+                    ? handlePriceClick("1,000 - 5,000", listedTypes.type)
+                    : null
+                }
+              >
                 <ListItemIcon>
-                  <BushelIcon />
+                  {listedTypes.type === "Commodities" ? (
+                    <BushelIcon />
+                  ) : (
+                    <MoneyIcon />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary="1,000 - 5,000" />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleBushelClick("5,000 - 10,000")}>
+              <StyledMenuItem
+                onClick={
+                  listedTypes.type === "Commodities"
+                    ? handleBushelClick("5,000 - 10,000")
+                    : null || listedTypes.type === "Land"
+                    ? handlePriceClick("5,000 - 10,000")
+                    : null || listedTypes.type === "Machinery"
+                    ? handlePriceClick("5,000 - 10,000")
+                    : null
+                }
+              >
                 <ListItemIcon>
-                  <BushelIcon />
+                  {listedTypes.type === "Commodities" ? (
+                    <BushelIcon />
+                  ) : (
+                    <MoneyIcon />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary="5,000 - 10,000" />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleBushelClick("10,000 - 50,000")}>
+              <StyledMenuItem
+                onClick={
+                  listedTypes.type === "Commodities"
+                    ? handleBushelClick("10,000 - 50,000")
+                    : null || listedTypes.type === "Land"
+                    ? handlePriceClick("10,000 - 50,000")
+                    : null || listedTypes.type === "Machinery"
+                    ? handlePriceClick("10,000 - 50,000")
+                    : null
+                }
+              >
                 <ListItemIcon>
-                  <BushelIcon />
+                  {listedTypes.type === "Commodities" ? (
+                    <BushelIcon />
+                  ) : (
+                    <MoneyIcon />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary="10,000 - 50,0000" />
               </StyledMenuItem>

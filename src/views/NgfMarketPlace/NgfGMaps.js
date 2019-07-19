@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import GoogleMapReact from "google-map-react";
-import LOS_ANGELES_CENTER from "../../const/la_center";
+import CENTER from "../../const/center";
 import GMAPS_API_KEY from "../../const/gmaps_api_key";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -8,10 +8,10 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class NgfGMaps extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: 46.657748,
+      lng: -112.2873659
     },
-    zoom: 11
+    zoom: 6
   };
 
   render() {
@@ -22,7 +22,7 @@ class NgfGMaps extends Component {
           bootstrapURLKeys={{
             key: GMAPS_API_KEY /* YOUR KEY HERE */
           }}
-          defaultCenter={LOS_ANGELES_CENTER}
+          defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent lat={34.0522} lng={-118.2437} text="My Marker" />
