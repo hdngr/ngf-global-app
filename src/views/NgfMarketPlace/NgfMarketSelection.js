@@ -6,7 +6,7 @@ import NgfDrawer from "./NgfDrawer";
 import NgfSearchResult from "./NgfSearchResult";
 import NgfAppBar from "./NgfAppBar";
 import NgfSearchBar from "./NgfSearchBar";
-
+import NgfGMaps from "./NgfGMaps";
 import { render } from "react-dom";
 const drawerWidth = 240;
 class NgfMarketSelection extends Component {
@@ -23,6 +23,7 @@ class NgfMarketSelection extends Component {
       <div>
         <NgfAppBar />
         <NgfSearchBar />
+        <NgfGMaps />
         {/* <NgfDrawer /> */}
         {/* <NgfSearchResult props={this.state} /> */}
       </div>
