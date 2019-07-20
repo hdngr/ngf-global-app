@@ -37,7 +37,6 @@ export default [
   "Harvesting",
   "Hay & Forge",
   "Chemical Applicators",
-  "Tillage",
   "Seeding & Planting",
   "Trailers",
   "Skid Steers",

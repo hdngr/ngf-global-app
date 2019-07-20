@@ -28,6 +28,10 @@ import OrganicIcon from "@material-ui/icons/BrightnessLow";
 import GmoIcon from "@material-ui/icons/BubbleChart";
 import SaleIcon from "@material-ui/icons/MonetizationOn";
 import Searches from "../../const/searches";
+import sCommodities from "../../const/commodities";
+import sLand from "../../const/land";
+import sMachinery from "../../const/machinery";
+
 export default function NgfSearchBar(props) {
   const items = Searches;
 
@@ -49,11 +53,29 @@ export default function NgfSearchBar(props) {
     if (suggestions.length < 1) {
       return;
     }
+    if (sCommodities.includes(value)) {
+      handleListingClick("Commodities", e);
+    }
+    if (sLand.includes(value)) {
+      handleListingClick("Land", e);
+    }
+    if (sMachinery.includes(value)) {
+      handleListingClick("Machinery", e);
+    }
     setDropDownAnchorEl(e.currentTarget);
   };
 
   function suggestionSelected(value) {
     setText(value);
+    if (sCommodities.includes(value)) {
+      handleListingClick("Commodities", null);
+    }
+    if (sLand.includes(value)) {
+      handleListingClick("Land", null);
+    }
+    if (sMachinery.includes(value)) {
+      handleListingClick("Machinery", null);
+    }
     setSuggestions(null);
   }
   function renderSuggestions() {
@@ -68,7 +90,7 @@ export default function NgfSearchBar(props) {
         getContentAnchorEl={null}
         anchorEl={dropanchorel}
         keepMounted
-        onKeyDown={handleCloseDropDown}
+        onKeyDown={() => handleCloseDropDown(event)}
         open={Boolean(dropanchorel)}
         onClose={handleCloseDropDown}
         anchorOrigin={{
@@ -92,10 +114,6 @@ export default function NgfSearchBar(props) {
               <Typography variant="h5">{item}</Typography>
             </ListItemText>
           </StyledMenuItem>
-
-          //   <li key={i} onClick={() => suggestionSelected(item)}>
-          //     {item}
-          //   </li>
         ))}
       </StyledMenu>
     );
@@ -111,7 +129,6 @@ export default function NgfSearchBar(props) {
   const [dropanchorel, setDropDownAnchorEl] = React.useState(null);
 
   function handleClick(event) {
-    console.log(event.currentTarget.value); //redo functions
     setAnchorEl(event.currentTarget);
   }
 
@@ -154,7 +171,10 @@ export default function NgfSearchBar(props) {
   function handleClose6() {
     setMAnchorEl(null);
   }
-  function handleCloseDropDown() {
+  function handleCloseDropDown(event) {
+    if (event.keyCode === 40 || event.keyCode === 38) {
+      return;
+    }
     setDropDownAnchorEl(null);
   }
 
@@ -168,10 +188,11 @@ export default function NgfSearchBar(props) {
     machinery: "Select Buy/Rent/Lease"
   });
 
-  const handleListingClick = listing => e => {
+  function handleListingClick(listing, e) {
+    console.log("listing updated");
     setListedTypes({ ...listedTypes, type: listing });
     handleClose();
-  };
+  }
   const handleBushelClick = bushel => e => {
     setListedTypes({ ...listedTypes, bushels: bushel });
     handleClose2();
@@ -224,7 +245,7 @@ export default function NgfSearchBar(props) {
               />
             </div>
             <div className={classes.search}>
-              <Typography variant="h5" noWrap style={{ color: "Black" }}>
+              <Typography variant="h5" noWrap>
                 {renderSuggestions()}
               </Typography>
             </div>
@@ -234,7 +255,7 @@ export default function NgfSearchBar(props) {
               aria-haspopup="true"
               variant="contained"
               color="primary"
-              value="carol"
+              value="listing type"
               onClick={handleClick}
             >
               {listedTypes.type === "Commodities" ? (
@@ -263,19 +284,25 @@ export default function NgfSearchBar(props) {
                 horizontal: "center"
               }}
             >
-              <StyledMenuItem onClick={handleListingClick("Commodities")}>
+              <StyledMenuItem
+                onClick={event => handleListingClick("Commodities", event)}
+              >
                 <ListItemIcon>
                   <img className={classes.ngfIcon} alt="ngf" src={NgfIcon} />
                 </ListItemIcon>
                 <ListItemText primary="Commodities" />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleListingClick("Land")}>
+              <StyledMenuItem
+                onClick={event => handleListingClick("Land", event)}
+              >
                 <ListItemIcon>
                   <LandscapeIcon />
                 </ListItemIcon>
                 <ListItemText primary="Land" />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleListingClick("Machinery")}>
+              <StyledMenuItem
+                onClick={event => handleListingClick("Machinery", event)}
+              >
                 <ListItemIcon>
                   <BuildIcon />
                 </ListItemIcon>
