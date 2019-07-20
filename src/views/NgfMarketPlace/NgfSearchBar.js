@@ -90,7 +90,7 @@ export default function NgfSearchBar(props) {
         getContentAnchorEl={null}
         anchorEl={dropanchorel}
         keepMounted
-        onKeyDown={() => handleCloseDropDown(event)}
+        onKeyDown={event => handleCloseDropDown(event)}
         open={Boolean(dropanchorel)}
         onClose={handleCloseDropDown}
         anchorOrigin={{
