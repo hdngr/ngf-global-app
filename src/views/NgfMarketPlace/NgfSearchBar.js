@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ScrollView } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -27,13 +27,80 @@ import BushelIcon from "@material-ui/icons/FilterVintage";
 import OrganicIcon from "@material-ui/icons/BrightnessLow";
 import GmoIcon from "@material-ui/icons/BubbleChart";
 import SaleIcon from "@material-ui/icons/MonetizationOn";
+import Searches from "../../const/searches";
 export default function NgfSearchBar(props) {
-  const [autocompletestate, setAutoCompleteState] = React.useState({
-    activeSuggestion: 0,
-    filteredSuggestions: [],
-    showSuggestions: false,
-    userInput: ""
-  });
+  const items = Searches;
+
+  const [suggestions, setSuggestions] = React.useState(null);
+
+  const [text, setText] = React.useState("");
+
+  const onTextChanged = e => {
+    const value = e.target.value;
+    console.log(value);
+    let suggestions = "";
+    if (value.length > 0) {
+      const regex = new RegExp(`^${value}`, "i");
+      suggestions = items.sort().filter(v => regex.test(v));
+      console.log("suggestion: " + suggestions);
+    }
+    setSuggestions(...[], suggestions);
+    setText(value);
+    if (suggestions.length < 1) {
+      return;
+    }
+    setDropDownAnchorEl(e.currentTarget);
+  };
+
+  function suggestionSelected(value) {
+    setText(value);
+    setSuggestions(null);
+  }
+  function renderSuggestions() {
+    if (suggestions === null || suggestions === "") {
+      return null;
+    }
+    console.log(suggestions);
+    return (
+      <StyledMenu
+        id="dropdown-menu"
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorEl={dropanchorel}
+        keepMounted
+        onKeyDown={handleCloseDropDown}
+        open={Boolean(dropanchorel)}
+        onClose={handleCloseDropDown}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+      >
+        {suggestions.map((item, i) => (
+          <StyledMenuItem
+            style={{
+              width: 250,
+              whitespace: "normal"
+            }}
+            onClick={() => suggestionSelected(item)}
+          >
+            <ListItemText key={i}>
+              <Typography variant="h5">{item}</Typography>
+            </ListItemText>
+          </StyledMenuItem>
+
+          //   <li key={i} onClick={() => suggestionSelected(item)}>
+          //     {item}
+          //   </li>
+        ))}
+      </StyledMenu>
+    );
+  }
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [banchorEl, setBAnchorEl] = React.useState(null);
@@ -41,8 +108,10 @@ export default function NgfSearchBar(props) {
   const [oanchorEl, setOAnchorEl] = React.useState(null);
   const [lanchorEl, setLAnchorEl] = React.useState(null);
   const [manchorEl, setMAnchorEl] = React.useState(null);
+  const [dropanchorel, setDropDownAnchorEl] = React.useState(null);
 
   function handleClick(event) {
+    console.log(event.currentTarget.value); //redo functions
     setAnchorEl(event.currentTarget);
   }
 
@@ -84,6 +153,9 @@ export default function NgfSearchBar(props) {
 
   function handleClose6() {
     setMAnchorEl(null);
+  }
+  function handleCloseDropDown() {
+    setDropDownAnchorEl(null);
   }
 
   const [listedTypes, setListedTypes] = React.useState({
@@ -135,11 +207,14 @@ export default function NgfSearchBar(props) {
         */}
         <Toolbar className={classes.searchbar}>
           <div className={classes.left}>
-            <div className={classes.search}>
+            <div className={classes.search} ß>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
               <InputBase
+                value={text}
+                onChange={onTextChanged}
+                type="text"
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
@@ -148,12 +223,18 @@ export default function NgfSearchBar(props) {
                 inputProps={{ "aria-label": "Search" }}
               />
             </div>
+            <div className={classes.search}>
+              <Typography variant="h5" noWrap style={{ color: "Black" }}>
+                {renderSuggestions()}
+              </Typography>
+            </div>
             <Button
               className={classes.searchButton}
               aria-controls="customized-menu"
               aria-haspopup="true"
               variant="contained"
               color="primary"
+              value="carol"
               onClick={handleClick}
             >
               {listedTypes.type === "Commodities" ? (
@@ -495,6 +576,7 @@ export default function NgfSearchBar(props) {
               </StyledMenuItem>
             </StyledMenu>
           </div>
+
           <div className={classes.right} />
         </Toolbar>
       </AppBar>
@@ -504,7 +586,8 @@ export default function NgfSearchBar(props) {
 
 const StyledMenu = withStyles({
   paper: {
-    border: "1px solid #d3d4d5"
+    border: "1px solid #d3d4d5",
+    boxShadow: "0 0 0 1px #7bb737"
   }
 })(Menu);
 
