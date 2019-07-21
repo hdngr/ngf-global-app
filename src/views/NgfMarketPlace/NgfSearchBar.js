@@ -32,21 +32,38 @@ import sCommodities from "../../const/commodities";
 import sLand from "../../const/land";
 import sMachinery from "../../const/machinery";
 
+var dropdownDelay;
 export default function NgfSearchBar(props) {
+  const classes = useStyles();
   const items = Searches;
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [banchorEl, setBAnchorEl] = React.useState(null);
+  const [ganchorEl, setGAnchorEl] = React.useState(null);
+  const [oanchorEl, setOAnchorEl] = React.useState(null);
+  const [lanchorEl, setLAnchorEl] = React.useState(null);
+  const [manchorEl, setMAnchorEl] = React.useState(null);
+  const [dropanchorel, setDropDownAnchorEl] = React.useState(null);
   const [suggestions, setSuggestions] = React.useState(null);
-
   const [text, setText] = React.useState("");
-
+  const [listedTypes, setListedTypes] = React.useState({
+    type: "Listing Type",
+    bushels: "Select Bushels",
+    price: "Select Price Range",
+    gmo: "GMO",
+    organic: "Organic",
+    land: "Select Buy/Lease",
+    machinery: "Select Buy/Rent/Lease"
+  });
   const onTextChanged = e => {
+    const currentTarget = e.currentTarget;
     const value = e.target.value;
-    console.log(value);
+    clearTimeout(dropdownDelay);
+    //console.log(value);
     let suggestions = "";
     if (value.length > 0) {
       const regex = new RegExp(`^${value}`, "i");
       suggestions = items.sort().filter(v => regex.test(v));
-      console.log("suggestion: " + suggestions);
+      //console.log("suggestion: " + suggestions);
     }
     setSuggestions(...[], suggestions);
     setText(value);
@@ -62,7 +79,8 @@ export default function NgfSearchBar(props) {
     if (sMachinery.includes(value)) {
       handleListingClick("Machinery", e);
     }
-    setDropDownAnchorEl(e.currentTarget);
+
+    dropdownDelay = setTimeout(() => setDropDownAnchorEl(currentTarget), 1000);
   };
 
   function suggestionSelected(value) {
@@ -82,7 +100,7 @@ export default function NgfSearchBar(props) {
     if (suggestions === null || suggestions === "") {
       return null;
     }
-    console.log(suggestions);
+    //console.log(suggestions);
     return (
       <StyledMenu
         id="dropdown-menu"
@@ -118,57 +136,36 @@ export default function NgfSearchBar(props) {
       </StyledMenu>
     );
   }
-
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [banchorEl, setBAnchorEl] = React.useState(null);
-  const [ganchorEl, setGAnchorEl] = React.useState(null);
-  const [oanchorEl, setOAnchorEl] = React.useState(null);
-  const [lanchorEl, setLAnchorEl] = React.useState(null);
-  const [manchorEl, setMAnchorEl] = React.useState(null);
-  const [dropanchorel, setDropDownAnchorEl] = React.useState(null);
-
   function handleClick(event) {
-    setAnchorEl(event.currentTarget);
+    switch (event.currentTarget.value) {
+      case "listing type":
+        setAnchorEl(event.currentTarget);
+        break;
+      case "bushel/price":
+        setBAnchorEl(event.currentTarget);
+        break;
+      case "GMO":
+        setGAnchorEl(event.currentTarget);
+        break;
+      case "Organic":
+        setOAnchorEl(event.currentTarget);
+        break;
+      case "Land":
+        setLAnchorEl(event.currentTarget);
+        break;
+      case "Machinery":
+        setMAnchorEl(event.currentTarget);
+        break;
+      default:
+        break;
+    }
   }
-
   function handleClose() {
     setAnchorEl(null);
-  }
-
-  function handleClick2(event) {
-    setBAnchorEl(event.currentTarget);
-  }
-
-  function handleClose2() {
     setBAnchorEl(null);
-  }
-  function handleClick3(event) {
-    setGAnchorEl(event.currentTarget);
-  }
-
-  function handleClose3() {
     setGAnchorEl(null);
-  }
-  function handleClick4(event) {
-    setOAnchorEl(event.currentTarget);
-  }
-
-  function handleClose4() {
     setOAnchorEl(null);
-  }
-  function handleClick5(event) {
-    setLAnchorEl(event.currentTarget);
-  }
-
-  function handleClose5() {
     setLAnchorEl(null);
-  }
-  function handleClick6(event) {
-    setMAnchorEl(event.currentTarget);
-  }
-
-  function handleClose6() {
     setMAnchorEl(null);
   }
   function handleCloseDropDown(event) {
@@ -177,45 +174,34 @@ export default function NgfSearchBar(props) {
     }
     setDropDownAnchorEl(null);
   }
-
-  const [listedTypes, setListedTypes] = React.useState({
-    type: "Listing Type",
-    bushels: "Select Bushels",
-    price: "Select Price Range",
-    gmo: "GMO",
-    organic: "Organic",
-    land: "Select Buy/Lease",
-    machinery: "Select Buy/Rent/Lease"
-  });
-
   function handleListingClick(listing, e) {
-    console.log("listing updated");
+    //console.log("listing updated");
     setListedTypes({ ...listedTypes, type: listing });
     handleClose();
   }
   const handleBushelClick = bushel => e => {
     setListedTypes({ ...listedTypes, bushels: bushel });
-    handleClose2();
+    handleClose();
   };
   const handlePriceClick = (price, from) => e => {
     setListedTypes({ ...listedTypes, price: price });
-    handleClose2();
+    handleClose();
   };
   const handleGmoClick = GMO => e => {
     setListedTypes({ ...listedTypes, gmo: GMO });
-    handleClose3();
+    handleClose();
   };
   const handleOrganicClick = organic => e => {
     setListedTypes({ ...listedTypes, organic: organic });
-    handleClose4();
+    handleClose();
   };
   const handleLandClick = land => e => {
     setListedTypes({ ...listedTypes, land: land });
-    handleClose5();
+    handleClose();
   };
   const handleMachineryClick = machinery => e => {
     setListedTypes({ ...listedTypes, machinery: machinery });
-    handleClose6();
+    handleClose();
   };
 
   return (
@@ -232,6 +218,11 @@ export default function NgfSearchBar(props) {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
+              {/* 
+
+                Search Input
+
+               */}
               <InputBase
                 value={text}
                 onChange={onTextChanged}
@@ -249,6 +240,11 @@ export default function NgfSearchBar(props) {
                 {renderSuggestions()}
               </Typography>
             </div>
+            {/* 
+
+                Listings Button
+
+            */}
             <Button
               className={classes.searchButton}
               aria-controls="customized-menu"
@@ -267,6 +263,11 @@ export default function NgfSearchBar(props) {
                 {listedTypes.type}
               </Typography>
             </Button>
+            {/* 
+
+                Listings Menu
+
+            */}
             <StyledMenu
               id="customized-menu"
               elevation={0}
@@ -309,7 +310,14 @@ export default function NgfSearchBar(props) {
                 <ListItemText primary="Machinery" />
               </StyledMenuItem>
             </StyledMenu>
+            {/* 
 
+                 Bushel/Price Button
+                 GMO Button
+                 Organic Button
+
+
+            */}
             {listedTypes.type === "Commodities" ||
             listedTypes.type === "Land" ||
             listedTypes.type === "Machinery" ? (
@@ -319,7 +327,8 @@ export default function NgfSearchBar(props) {
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
-                onClick={handleClick2}
+                value="bushel/price"
+                onClick={handleClick}
               >
                 {listedTypes.type === "Commodities" ? (
                   <BushelIcon />
@@ -341,7 +350,8 @@ export default function NgfSearchBar(props) {
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
-                onClick={handleClick3}
+                value="GMO"
+                onClick={handleClick}
               >
                 <GmoIcon />
                 <Typography variant="h5" noWrap>
@@ -356,7 +366,8 @@ export default function NgfSearchBar(props) {
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
-                onClick={handleClick4}
+                value="Organic"
+                onClick={handleClick}
               >
                 <OrganicIcon />
                 <Typography variant="h5" noWrap>
@@ -364,6 +375,11 @@ export default function NgfSearchBar(props) {
                 </Typography>
               </Button>
             ) : null}
+            {/* 
+
+                Land Button
+
+            */}
             {listedTypes.type === "Land" ? (
               <Button
                 className={classes.searchButton}
@@ -371,7 +387,8 @@ export default function NgfSearchBar(props) {
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
-                onClick={handleClick5}
+                value="Land"
+                onClick={handleClick}
               >
                 <SaleIcon />
                 <Typography variant="h5" noWrap>
@@ -379,6 +396,11 @@ export default function NgfSearchBar(props) {
                 </Typography>
               </Button>
             ) : null}
+            {/* 
+
+                Machinery Button
+
+            */}
             {listedTypes.type === "Machinery" ? (
               <Button
                 className={classes.searchButton}
@@ -386,7 +408,8 @@ export default function NgfSearchBar(props) {
                 aria-haspopup="true"
                 variant="contained"
                 color="primary"
-                onClick={handleClick6}
+                value="Machinery"
+                onClick={handleClick}
               >
                 <SaleIcon />
                 <Typography variant="h5" noWrap>
@@ -394,7 +417,11 @@ export default function NgfSearchBar(props) {
                 </Typography>
               </Button>
             ) : null}
+            {/* 
 
+                Bushel/Price Dropdown Menu
+
+            */}
             <StyledMenu
               id="bushel-menu"
               elevation={0}
@@ -402,7 +429,7 @@ export default function NgfSearchBar(props) {
               anchorEl={banchorEl}
               keepMounted
               open={Boolean(banchorEl)}
-              onClose={handleClose2}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center"
@@ -473,7 +500,11 @@ export default function NgfSearchBar(props) {
                 <ListItemText primary="10,000 - 50,0000" />
               </StyledMenuItem>
             </StyledMenu>
+            {/* 
 
+                GMO Dropdown Menu
+
+            */}
             <StyledMenu
               id="gmo-menu"
               elevation={0}
@@ -481,7 +512,7 @@ export default function NgfSearchBar(props) {
               anchorEl={ganchorEl}
               keepMounted
               open={Boolean(ganchorEl)}
-              onClose={handleClose3}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center"
@@ -504,7 +535,11 @@ export default function NgfSearchBar(props) {
                 <ListItemText primary="Non-GMO" />
               </StyledMenuItem>
             </StyledMenu>
+            {/* 
 
+                Organic Dropdown Menu
+
+            */}
             <StyledMenu
               id="organic-menu"
               elevation={0}
@@ -512,7 +547,7 @@ export default function NgfSearchBar(props) {
               anchorEl={oanchorEl}
               keepMounted
               open={Boolean(oanchorEl)}
-              onClose={handleClose4}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center"
@@ -535,6 +570,11 @@ export default function NgfSearchBar(props) {
                 <ListItemText primary="Non-Organic" />
               </StyledMenuItem>
             </StyledMenu>
+            {/* 
+
+                Land Dropdown Menu
+
+            */}
             <StyledMenu
               id="land-menu"
               elevation={0}
@@ -542,7 +582,7 @@ export default function NgfSearchBar(props) {
               anchorEl={lanchorEl}
               keepMounted
               open={Boolean(lanchorEl)}
-              onClose={handleClose5}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center"
@@ -565,7 +605,11 @@ export default function NgfSearchBar(props) {
                 <ListItemText primary="Lease" />
               </StyledMenuItem>
             </StyledMenu>
+            {/* 
 
+                Machinery Dropdown Menu
+
+            */}
             <StyledMenu
               id="machinery-menu"
               elevation={0}
@@ -573,7 +617,7 @@ export default function NgfSearchBar(props) {
               anchorEl={manchorEl}
               keepMounted
               open={Boolean(manchorEl)}
-              onClose={handleClose6}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center"
@@ -647,12 +691,8 @@ const useStyles = makeStyles(theme => ({
     fontStyle: "none",
     color: theme.palette.secondary.main
   },
-  toolbar: {
-    justifyContent: "flex-end",
-    backgroundColor: theme.palette.secondary.light
-  },
   searchbar: {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: "#ffffff",
     borderWidth: 2,
     borderStyle: "dashed",
     borderWidth: 1,

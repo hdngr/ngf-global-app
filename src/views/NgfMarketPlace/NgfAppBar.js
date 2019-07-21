@@ -11,6 +11,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import NGFLogo from "../../images/ngflogoImage3.png";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   },
   toolbar: {
     justifyContent: "flex-end",
-    backgroundColor: theme.palette.secondary.light
+    backgroundColor: "#ffffff"
   },
   left: {
     flex: 1
@@ -60,6 +61,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function NgfAppBar() {
+  const matches = useMediaQuery("(min-width:600px)");
+
   const classes = useStyles();
 
   return (
@@ -106,7 +109,7 @@ export default function NgfAppBar() {
             </ButtonBase>
 
             <Typography className={classes.pipe} variant="h5" noWrap>
-              |
+              {matches === false ? "" : "|"}
             </Typography>
 
             <ButtonBase color="inherit">
@@ -116,7 +119,7 @@ export default function NgfAppBar() {
             </ButtonBase>
 
             <Typography className={classes.pipe} variant="h5" noWrap>
-              |
+              {matches === false ? "" : "|"}
             </Typography>
 
             <ButtonBase color="inherit">

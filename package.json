@@ -29,6 +29,8 @@
     "react-proxy-loader": "^0.3.5",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-tappable": "^1.0.4",
+    "remotedebug-ios-webkit-adapter": "^0.3.2",
     "resium": "^1.4.1",
     "typescript": "^3.5.3"
   },
