@@ -25,12 +25,12 @@ class NgfMarketSelection extends Component {
         <NgfAppBar />
         <NgfSearchBar />
         <Grid sm container direction="row">
-          <Grid sm item>
-            <NgfGMaps style={{ flex: 1, flexWrap: "wrap" }} />
+          <Grid sm item style={{boxShadow: "2px 0px 20px 2px #000000"}}>
+            <NgfGMaps style={{ flexGrow: 1, flexWrap: "wrap" }} />
           </Grid>
           <Grid sm item>
             <NgfSearchResult
-              style={{ flex: 1, flexWrap: "wrap" }}
+              style={{ flexGrow: 1, flexWrap: "wrap" }}
               props={this.state}
             />
           </Grid>
@@ -40,13 +40,6 @@ class NgfMarketSelection extends Component {
   }
 }
 const styles = theme => ({
-  background: {
-    marginLeft: drawerWidth,
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "cover",
-    height: "100vh"
-  },
   root: {
     display: "flex",
     backgroundColor: theme.palette.secondary.light,

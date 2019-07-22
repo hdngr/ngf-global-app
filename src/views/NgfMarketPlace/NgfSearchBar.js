@@ -1,7 +1,6 @@
-import React, { ScrollView } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
@@ -15,9 +14,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import LandscapeIcon from "@material-ui/icons/Landscape";
 import BuildIcon from "@material-ui/icons/Build";
 import NgfIcon from "../../images/ngfIcon.png";
@@ -54,6 +50,7 @@ export default function NgfSearchBar(props) {
     land: "Select Buy/Lease",
     machinery: "Select Buy/Rent/Lease"
   });
+
   const onTextChanged = e => {
     const currentTarget = e.currentTarget;
     const value = e.target.value;
@@ -725,7 +722,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.primary.main, 0.25)
     },
-    //marginRight: theme.spacing(2),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
