@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import NGFLogo from "../../images/ngflogoImage3.png";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -112,7 +113,12 @@ export default function NgfAppBar() {
               {matches === false ? "" : "|"}
             </Typography>
 
-            <ButtonBase color="inherit">
+            <ButtonBase
+              color="inherit"
+              component={linkProps => (
+                <Link {...linkProps} to="/Login" variant="button" />
+              )}
+            >
               <Typography className={classes.baseButtons} variant="h5" noWrap>
                 Sign in or Join
               </Typography>
